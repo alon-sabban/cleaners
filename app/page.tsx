@@ -5,28 +5,28 @@ export default function HomePage() {
   const features = [
     {
       icon: Shield,
-      title: "Vetted Professionals",
-      desc: "Every cleaner is background-checked and community-reviewed.",
+      title: "אנשי מקצוע מבוקרים",
+      desc: "כל מנקה עובר בדיקת רקע ומדורג על ידי הקהילה.",
     },
     {
       icon: Star,
-      title: "Rated & Reviewed",
-      desc: "Real reviews from real community members.",
+      title: "מדורגים ומוערכים",
+      desc: "ביקורות אמיתיות מחברי קהילה אמיתיים.",
     },
     {
       icon: Clock,
-      title: "Book in Minutes",
-      desc: "Choose your cleaner, pick a time, confirm. Done.",
+      title: "הזמן תוך דקות",
+      desc: "בחר את המנקה שלך, קבע זמן, אשר. סיום.",
     },
   ];
 
   const services = [
-    "Home Cleaning",
-    "Deep Cleaning",
-    "Office Cleaning",
-    "Post-Construction",
-    "Move In/Out",
-    "Window Cleaning",
+    "ניקיון בית",
+    "ניקיון עמוק",
+    "ניקיון משרד",
+    "לאחר שיפוץ",
+    "כניסה/יציאה מדירה",
+    "ניקיון חלונות",
   ];
 
   return (
@@ -35,10 +35,10 @@ export default function HomePage() {
       <section className="bg-gradient-to-br from-blue-600 to-blue-800 text-white py-24 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-5xl font-bold mb-6">
-            Find Trusted Cleaners<br />in Your Community
+            מצא מנקים אמינים<br />בקהילה שלך
           </h1>
           <p className="text-xl text-blue-100 mb-10">
-            Book vetted, community-trusted cleaning professionals. Fast, easy, reliable.
+            הזמן מקצועני ניקיון מבוקרים ומהימנים על ידי הקהילה. מהיר, קל, אמין.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -46,13 +46,13 @@ export default function HomePage() {
               className="bg-white text-blue-700 font-semibold px-8 py-4 rounded-xl hover:bg-blue-50 transition-colors flex items-center justify-center gap-2"
             >
               <Search size={20} />
-              Find a Cleaner
+              מצא מנקה
             </Link>
             <Link
               href="/register?role=cleaner"
               className="border-2 border-white text-white font-semibold px-8 py-4 rounded-xl hover:bg-blue-700 transition-colors"
             >
-              Offer Your Services
+              הצע את שירותיך
             </Link>
           </div>
         </div>
@@ -61,7 +61,7 @@ export default function HomePage() {
       {/* Features */}
       <section className="py-20 px-4 bg-gray-50">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">Why CleanMatch?</h2>
+          <h2 className="text-3xl font-bold text-center mb-12">למה קלין מאץ'?</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {features.map(({ icon: Icon, title, desc }) => (
               <div key={title} className="bg-white rounded-2xl p-8 shadow-sm text-center">
@@ -79,8 +79,8 @@ export default function HomePage() {
       {/* Services */}
       <section className="py-20 px-4">
         <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-4">Services Available</h2>
-          <p className="text-gray-600 mb-10">Whatever you need cleaned, we have someone for it.</p>
+          <h2 className="text-3xl font-bold mb-4">שירותים זמינים</h2>
+          <p className="text-gray-600 mb-10">מה שצריך לנקות, יש לנו מישהו לזה.</p>
           <div className="flex flex-wrap justify-center gap-3">
             {services.map((s) => (
               <Link
@@ -98,15 +98,15 @@ export default function HomePage() {
       {/* CTA */}
       <section className="py-20 px-4 bg-blue-600 text-white text-center">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-3xl font-bold mb-4">Ready to get started?</h2>
+          <h2 className="text-3xl font-bold mb-4">מוכן להתחיל?</h2>
           <p className="text-blue-100 mb-8">
-            Join hundreds of community members already using CleanMatch.
+            הצטרף למאות חברי קהילה שכבר משתמשים בקלין מאץ'.
           </p>
           <Link
             href="/register"
             className="bg-white text-blue-700 font-semibold px-8 py-4 rounded-xl hover:bg-blue-50 transition-colors inline-block"
           >
-            Create Free Account
+            צור חשבון חינמי
           </Link>
         </div>
       </section>

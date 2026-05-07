@@ -37,13 +37,13 @@ export default function CleanerCard({ cleaner }: { cleaner: CleanerProfile & { p
               <Star size={12} className="text-yellow-400 fill-yellow-400" />
               {cleaner.rating_avg > 0
                 ? `${Number(cleaner.rating_avg).toFixed(1)} (${cleaner.total_reviews})`
-                : "New"}
+                : "חדש"}
             </span>
           </div>
         </div>
-        <div className="text-right shrink-0">
-          <span className="text-lg font-bold text-blue-600">${cleaner.hourly_rate}</span>
-          <span className="text-xs text-gray-400">/hr</span>
+        <div className="text-right rtl:text-left shrink-0">
+          <span className="text-lg font-bold text-blue-600">₪{cleaner.hourly_rate}</span>
+          <span className="text-xs text-gray-400">/שעה</span>
         </div>
       </div>
 
@@ -59,7 +59,7 @@ export default function CleanerCard({ cleaner }: { cleaner: CleanerProfile & { p
           ))}
           {cleaner.services.length > 3 && (
             <span className="text-xs text-gray-400 px-2 py-1">
-              +{cleaner.services.length - 3} more
+              +{cleaner.services.length - 3} עוד
             </span>
           )}
         </div>

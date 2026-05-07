@@ -7,9 +7,9 @@ import Footer from "@/components/layout/Footer";
 const geist = Geist({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "CleanMatch — Find Trusted Cleaners in Your Community",
+  title: "קלין מאץ' — מצא מנקים אמינים בקהילה שלך",
   description:
-    "Connect with vetted, community-trusted cleaning professionals. Book in minutes.",
+    "התחבר עם מקצועני ניקיון מבוקרים ומהימנים על ידי הקהילה. הזמן תוך דקות.",
 };
 
 export default function RootLayout({
@@ -18,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="he" dir="rtl">
       <body className={`${geist.className} bg-white text-gray-900 min-h-screen flex flex-col`}>
         <Navbar />
         <main className="flex-1">{children}</main>

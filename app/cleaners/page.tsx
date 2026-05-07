@@ -31,8 +31,8 @@ export default async function CleanersPage({
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
-      <h1 className="text-3xl font-bold mb-2">Find a Cleaner</h1>
-      <p className="text-gray-500 mb-8">Browse vetted community cleaning professionals</p>
+      <h1 className="text-3xl font-bold mb-2">מצא מנקה</h1>
+      <p className="text-gray-500 mb-8">עיין במקצועני ניקיון מבוקרים מהקהילה</p>
 
       <SearchFilters />
 
@@ -44,8 +44,8 @@ export default async function CleanersPage({
         </div>
       ) : (
         <div className="text-center py-20 text-gray-400">
-          <p className="text-lg">No cleaners found matching your criteria.</p>
-          <p className="text-sm mt-2">Try adjusting your filters.</p>
+          <p className="text-lg">לא נמצאו מנקים התואמים לקריטריונים שלך.</p>
+          <p className="text-sm mt-2">נסה לשנות את הפילטרים.</p>
         </div>
       )}
     </div>

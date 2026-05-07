@@ -33,8 +33,8 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-1">Welcome back</h1>
-        <p className="text-gray-500 mb-6">Sign in to your CleanMatch account</p>
+        <h1 className="text-2xl font-bold mb-1">ברוך שובך</h1>
+        <p className="text-gray-500 mb-6">התחבר לחשבון קלין מאץ' שלך</p>
 
         {error && (
           <div className="bg-red-50 text-red-700 rounded-lg p-3 mb-4 text-sm">{error}</div>
@@ -42,7 +42,7 @@ export default function LoginPage() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-1">Email</label>
+            <label className="block text-sm font-medium mb-1">דואר אלקטרוני</label>
             <input
               type="email"
               required
@@ -53,7 +53,7 @@ export default function LoginPage() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Password</label>
+            <label className="block text-sm font-medium mb-1">סיסמה</label>
             <input
               type="password"
               required
@@ -68,14 +68,14 @@ export default function LoginPage() {
             disabled={loading}
             className="w-full bg-blue-600 text-white font-semibold py-3 rounded-xl hover:bg-blue-700 transition-colors disabled:opacity-50"
           >
-            {loading ? "Signing in…" : "Sign In"}
+            {loading ? "מתחבר..." : "התחבר"}
           </button>
         </form>
 
         <p className="text-center text-gray-500 mt-6 text-sm">
-          Don&apos;t have an account?{" "}
+          אין לך חשבון?{" "}
           <Link href="/register" className="text-blue-600 font-medium hover:underline">
-            Sign up
+            הירשם
           </Link>
         </p>
       </div>

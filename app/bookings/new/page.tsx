@@ -37,8 +37,8 @@ export default async function NewBookingPage({
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-12">
-      <h1 className="text-3xl font-bold mb-2">Book a Cleaner</h1>
-      <p className="text-gray-500 mb-8">Fill in the details below to request a booking.</p>
+      <h1 className="text-3xl font-bold mb-2">הזמן מנקה</h1>
+      <p className="text-gray-500 mb-8">מלא את הפרטים למטה כדי לבקש הזמנה.</p>
       <BookingForm
         userId={user.id}
         preselectedCleaner={preselected}

@@ -58,22 +58,22 @@ export default async function CleanerProfilePage({
               <span className="flex items-center gap-1">
                 <Star size={14} className="text-yellow-400 fill-yellow-400" />
                 {cleaner.rating_avg > 0
-                  ? `${Number(cleaner.rating_avg).toFixed(1)} (${cleaner.total_reviews} reviews)`
-                  : "No reviews yet"}
+                  ? `${Number(cleaner.rating_avg).toFixed(1)} (${cleaner.total_reviews} ביקורות)`
+                  : "חדש"}
               </span>
             </div>
             <p className="text-gray-600">{cleaner.bio || "No bio provided."}</p>
           </div>
-          <div className="text-right">
+          <div className="text-right rtl:text-left">
             <div className="text-3xl font-bold text-blue-600">
-              ${cleaner.hourly_rate}
-              <span className="text-base font-normal text-gray-400">/hr</span>
+              ₪{cleaner.hourly_rate}
+              <span className="text-base font-normal text-gray-400">/שעה</span>
             </div>
             <Link
               href={`/bookings/new?cleaner=${cleaner.id}`}
               className="mt-3 inline-block bg-blue-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-blue-700 transition-colors"
             >
-              Book Now
+              הזמן עכשיו
             </Link>
           </div>
         </div>
@@ -81,7 +81,7 @@ export default async function CleanerProfilePage({
 
       {/* Services */}
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mb-6">
-        <h2 className="font-semibold text-lg mb-4">Services Offered</h2>
+        <h2 className="font-semibold text-lg mb-4">שירותים מוצעים</h2>
         <div className="flex flex-wrap gap-2">
           {(cleaner.services as string[]).map((s) => (
             <span
@@ -97,7 +97,7 @@ export default async function CleanerProfilePage({
       {/* Reviews */}
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
         <h2 className="font-semibold text-lg mb-4">
-          Reviews ({cleaner.total_reviews})
+          ביקורות ({cleaner.total_reviews})
         </h2>
         {reviews && reviews.length > 0 ? (
           <div className="space-y-4">
@@ -123,7 +123,7 @@ export default async function CleanerProfilePage({
             })}
           </div>
         ) : (
-          <p className="text-gray-400 text-sm">No reviews yet.</p>
+          <p className="text-gray-400 text-sm">אין ביקורות עדיין.</p>
         )}
       </div>
     </div>

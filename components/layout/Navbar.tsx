@@ -14,7 +14,7 @@ export default async function Navbar() {
 
         <div className="flex items-center gap-6">
           <Link href="/cleaners" className="text-gray-600 hover:text-gray-900 text-sm font-medium">
-            Find Cleaners
+            מצא מנקים
           </Link>
 
           {user ? (
@@ -23,27 +23,27 @@ export default async function Navbar() {
                 href="/dashboard"
                 className="text-gray-600 hover:text-gray-900 text-sm font-medium"
               >
-                Dashboard
+                לוח הבקרה
               </Link>
               <form action="/api/auth/logout" method="POST">
                 <button
                   type="submit"
                   className="bg-gray-100 text-gray-700 text-sm font-medium px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors"
                 >
-                  Sign Out
+                  התנתק
                 </button>
               </form>
             </>
           ) : (
             <>
               <Link href="/login" className="text-gray-600 hover:text-gray-900 text-sm font-medium">
-                Sign In
+                התחבר
               </Link>
               <Link
                 href="/register"
                 className="bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
               >
-                Get Started
+                התחל עכשיו
               </Link>
             </>
           )}

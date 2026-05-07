@@ -51,8 +51,8 @@ function RegisterForm() {
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-1">Create your account</h1>
-        <p className="text-gray-500 mb-6">Join the CleanMatch community</p>
+        <h1 className="text-2xl font-bold mb-1">צור את החשבון שלך</h1>
+        <p className="text-gray-500 mb-6">הצטרף לקהילת קלין מאץ'</p>
 
         {error && (
           <div className="bg-red-50 text-red-700 rounded-lg p-3 mb-4 text-sm">{error}</div>
@@ -60,18 +60,18 @@ function RegisterForm() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-1">Full Name</label>
+            <label className="block text-sm font-medium mb-1">שם מלא</label>
             <input
               name="full_name"
               required
               value={form.full_name}
               onChange={handleChange}
               className="w-full border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Your name"
+              placeholder="שמך"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Email</label>
+            <label className="block text-sm font-medium mb-1">דואר אלקטרוני</label>
             <input
               type="email"
               name="email"
@@ -83,7 +83,7 @@ function RegisterForm() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Password</label>
+            <label className="block text-sm font-medium mb-1">סיסמה</label>
             <input
               type="password"
               name="password"
@@ -92,19 +92,19 @@ function RegisterForm() {
               value={form.password}
               onChange={handleChange}
               className="w-full border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="At least 6 characters"
+              placeholder="לפחות 6 תווים"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">I want to…</label>
+            <label className="block text-sm font-medium mb-1">אני רוצה…</label>
             <select
               name="role"
               value={form.role}
               onChange={handleChange}
               className="w-full border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option value="client">Find a cleaner (Client)</option>
-              <option value="cleaner">Offer cleaning services (Cleaner)</option>
+              <option value="client">מצוא מנקה (לקוח)</option>
+              <option value="cleaner">להציע שירותי ניקיון (מנקה)</option>
             </select>
           </div>
           <button
@@ -112,14 +112,14 @@ function RegisterForm() {
             disabled={loading}
             className="w-full bg-blue-600 text-white font-semibold py-3 rounded-xl hover:bg-blue-700 transition-colors disabled:opacity-50"
           >
-            {loading ? "Creating account…" : "Create Account"}
+            {loading ? "יוצר חשבון..." : "צור חשבון"}
           </button>
         </form>
 
         <p className="text-center text-gray-500 mt-6 text-sm">
-          Already have an account?{" "}
+          כבר יש לך חשבון?{" "}
           <Link href="/login" className="text-blue-600 font-medium hover:underline">
-            Sign in
+            התחבר
           </Link>
         </p>
       </div>

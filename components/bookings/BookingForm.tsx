@@ -4,12 +4,12 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 const SERVICES = [
-  "Home Cleaning",
-  "Deep Cleaning",
-  "Office Cleaning",
-  "Post-Construction",
-  "Move In/Out",
-  "Window Cleaning",
+  "ניקיון בית",
+  "ניקיון עמוק",
+  "ניקיון משרד",
+  "לאחר שיפוץ",
+  "כניסה/יציאה מדירה",
+  "ניקיון חלונות",
 ];
 
 interface CleanerOption {
@@ -81,7 +81,7 @@ export default function BookingForm({ userId, preselectedCleaner, cleaners }: Bo
       )}
 
       <div>
-        <label className="block text-sm font-medium mb-1">Cleaner</label>
+        <label className="block text-sm font-medium mb-1">מנקה</label>
         <select
           name="cleaner_id"
           required
@@ -89,17 +89,17 @@ export default function BookingForm({ userId, preselectedCleaner, cleaners }: Bo
           onChange={handleChange}
           className="w-full border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
-          <option value="">Select a cleaner…</option>
+          <option value="">בחר מנקה...</option>
           {cleaners.map((c) => (
             <option key={c.id} value={c.id}>
-              {c.profile?.full_name ?? "Cleaner"} — ${c.hourly_rate}/hr
+              {c.profile?.full_name ?? "Cleaner"} — ₪{c.hourly_rate}/שעה
             </option>
           ))}
         </select>
       </div>
 
       <div>
-        <label className="block text-sm font-medium mb-1">Service Type</label>
+        <label className="block text-sm font-medium mb-1">סוג שירות</label>
         <select
           name="service_type"
           required
@@ -107,7 +107,7 @@ export default function BookingForm({ userId, preselectedCleaner, cleaners }: Bo
           onChange={handleChange}
           className="w-full border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
-          <option value="">Select a service…</option>
+          <option value="">בחר שירות...</option>
           {SERVICES.map((s) => (
             <option key={s} value={s}>{s}</option>
           ))}
@@ -116,7 +116,7 @@ export default function BookingForm({ userId, preselectedCleaner, cleaners }: Bo
 
       <div className="grid sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium mb-1">Date</label>
+          <label className="block text-sm font-medium mb-1">תאריך</label>
           <input
             type="date"
             name="date"
@@ -128,7 +128,7 @@ export default function BookingForm({ userId, preselectedCleaner, cleaners }: Bo
           />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-1">Time</label>
+          <label className="block text-sm font-medium mb-1">שעה</label>
           <input
             type="time"
             name="time"
@@ -141,33 +141,33 @@ export default function BookingForm({ userId, preselectedCleaner, cleaners }: Bo
       </div>
 
       <div>
-        <label className="block text-sm font-medium mb-1">Address</label>
+        <label className="block text-sm font-medium mb-1">כתובת</label>
         <input
           type="text"
           name="address"
           required
           value={form.address}
           onChange={handleChange}
-          placeholder="Full address for the cleaning"
+          placeholder="כתובת מלאה לניקיון"
           className="w-full border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium mb-1">Notes (optional)</label>
+        <label className="block text-sm font-medium mb-1">הערות (אופציונלי)</label>
         <textarea
           name="notes"
           value={form.notes}
           onChange={handleChange}
           rows={3}
-          placeholder="Any special instructions or requests…"
+          placeholder="הוראות מיוחדות או בקשות..."
           className="w-full border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
         />
       </div>
 
       {selectedCleaner && (
         <div className="bg-blue-50 rounded-xl p-4 text-sm text-blue-700">
-          Estimated price: <strong>${selectedCleaner.hourly_rate}/hr</strong>
+          מחיר משוער: <strong>₪{selectedCleaner.hourly_rate}/שעה</strong>
         </div>
       )}
 
@@ -176,7 +176,7 @@ export default function BookingForm({ userId, preselectedCleaner, cleaners }: Bo
         disabled={loading}
         className="w-full bg-blue-600 text-white font-semibold py-3 rounded-xl hover:bg-blue-700 transition-colors disabled:opacity-50"
       >
-        {loading ? "Submitting…" : "Request Booking"}
+        {loading ? "שולח..." : "בקש הזמנה"}
       </button>
     </form>
   );
