@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { BookingStatus } from "@/types";
+import RefreshButton from "@/components/dashboard/RefreshButton";
 
 const STATUS_COLORS: Record<BookingStatus, string> = {
   pending: "bg-yellow-100 text-yellow-700",
@@ -56,6 +57,7 @@ export default async function ClientDashboardPage() {
         >
           הזמנה חדשה
         </Link>
+        <RefreshButton />
       </div>
 
       {/* Stats */}

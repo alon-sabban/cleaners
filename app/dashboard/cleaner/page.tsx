@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { AlertCircle } from "lucide-react";
 import { BookingStatus } from "@/types";
+import RefreshButton from "@/components/dashboard/RefreshButton";
 
 const STATUS_COLORS: Record<BookingStatus, string> = {
   pending: "bg-yellow-100 text-yellow-700",
@@ -52,9 +53,12 @@ export default async function CleanerDashboardPage() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold">לוח בקרה למנקה</h1>
-        <p className="text-gray-500">ברוך שובך, {profile?.full_name}</p>
+      <div className="flex items-start justify-between mb-8">
+        <div>
+          <h1 className="text-3xl font-bold">לוח בקרה למנקה</h1>
+          <p className="text-gray-500">ברוך שובך, {profile?.full_name}</p>
+        </div>
+        <RefreshButton />
       </div>
 
       {!cleanerProfile && (
