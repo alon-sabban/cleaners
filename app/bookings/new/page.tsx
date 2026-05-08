@@ -23,11 +23,12 @@ export default async function NewBookingPage({
 
   const { data: allCleaners } = await supabase
     .from("cleaner_profiles")
-    .select("id, hourly_rate, profile:profiles(full_name)")
+    .select("id, user_id, hourly_rate, profile:profiles(full_name)")
     .eq("is_verified", true);
 
-  const normalizeProfile = (c: { id: string; hourly_rate: number; profile: { full_name: string }[] | { full_name: string } | null }) => ({
+  const normalizeProfile = (c: { id: string; user_id: string; hourly_rate: number; profile: { full_name: string }[] | { full_name: string } | null }) => ({
     id: c.id,
+    user_id: c.user_id,
     hourly_rate: c.hourly_rate,
     profile: Array.isArray(c.profile) ? (c.profile[0] ?? null) : c.profile,
   });

@@ -14,6 +14,7 @@ const SERVICES = [
 
 interface CleanerOption {
   id: string;
+  user_id: string;
   hourly_rate: number;
   profile: { full_name: string } | null;
 }
@@ -56,7 +57,7 @@ export default function BookingForm({ userId, preselectedCleaner, cleaners }: Bo
     const res = await fetch("/api/bookings", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...form, price }),
+      body: JSON.stringify({ ...form, cleaner_id: selectedCleaner.user_id, price }),
     });
 
     const data = await res.json();
