@@ -13,7 +13,9 @@
       "Bash(git commit -m 'Fix implicit any type on setAll cookies parameter *)",
       "Bash(git commit -m 'Use CookieOptions type from @supabase/ssr for setAll parameter *)",
       "Bash(git commit -m 'Fix implicit any type in middleware setAll cookie handler *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(git pull *)",
+      "Bash(git stash *)"
     ]
   }
 }

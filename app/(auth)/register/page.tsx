@@ -1,12 +1,13 @@
 "use client";
 
 import { useState, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { Mail } from "lucide-react";
 
 function RegisterForm() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const defaultRole = searchParams.get("role") === "cleaner" ? "cleaner" : "client";
 
@@ -15,10 +16,11 @@ function RegisterForm() {
     email: "",
     password: "",
     role: defaultRole,
+    address: "",
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [done, setDone] = useState(false);
+  const [awaitingEmail, setAwaitingEmail] = useState(false);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
@@ -30,11 +32,11 @@ function RegisterForm() {
     setError("");
 
     const supabase = createClient();
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email: form.email,
       password: form.password,
       options: {
-        data: { full_name: form.full_name, role: form.role },
+        data: { full_name: form.full_name, role: form.role, address: form.address },
         emailRedirectTo: `${window.location.origin}/auth/confirm`,
       },
     });
@@ -45,10 +47,22 @@ function RegisterForm() {
       return;
     }
 
-    setDone(true);
+    // Email confirmation disabled — user is immediately logged in
+    if (data.session) {
+      if (form.role === "cleaner") {
+        router.push("/dashboard/cleaner/setup");
+      } else {
+        router.push("/dashboard/client");
+      }
+      router.refresh();
+      return;
+    }
+
+    // Email confirmation required
+    setAwaitingEmail(true);
   }
 
-  if (done) {
+  if (awaitingEmail) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-10 w-full max-w-md text-center">
@@ -56,9 +70,7 @@ function RegisterForm() {
             <Mail className="text-blue-600" size={32} />
           </div>
           <h1 className="text-2xl font-bold mb-2">בדוק את האימייל שלך</h1>
-          <p className="text-gray-500 mb-2">
-            שלחנו קישור אימות לכתובת:
-          </p>
+          <p className="text-gray-500 mb-2">שלחנו קישור אימות לכתובת:</p>
           <p className="font-semibold text-gray-800 mb-6">{form.email}</p>
           <p className="text-gray-400 text-sm">
             לחץ על הקישור באימייל כדי לאשר את החשבון ולהתחיל.
@@ -127,6 +139,20 @@ function RegisterForm() {
               <option value="cleaner">להציע שירותי ניקיון (מנקה)</option>
             </select>
           </div>
+
+          {form.role === "client" && (
+            <div>
+              <label className="block text-sm font-medium mb-1">כתובת בית</label>
+              <input
+                name="address"
+                value={form.address}
+                onChange={handleChange}
+                className="w-full border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="רחוב, עיר"
+              />
+            </div>
+          )}
+
           <button
             type="submit"
             disabled={loading}
