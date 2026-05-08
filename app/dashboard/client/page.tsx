@@ -88,11 +88,14 @@ export default async function ClientDashboardPage() {
                     </p>
                     <p className="text-sm text-gray-400">{b.address}</p>
                   </div>
-                  <div className="flex items-center gap-3">
+                  <div className="flex flex-col items-end gap-2">
                     <span className={`text-xs font-medium px-3 py-1 rounded-full ${STATUS_COLORS[b.status as BookingStatus]}`}>
                       {STATUS_LABELS[b.status as BookingStatus]}
                     </span>
                     <span className="font-semibold text-blue-600">₪{b.price}</span>
+                    <Link href={`/bookings/${b.id}`} className="text-xs text-blue-500 hover:underline">
+                      פרטים והודעות
+                    </Link>
                   </div>
                 </div>
               );

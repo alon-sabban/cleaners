@@ -108,11 +108,14 @@ export default async function CleanerDashboardPage() {
                     <p className="text-sm text-gray-400">{b.address}</p>
                     {b.notes && <p className="text-sm text-gray-500 italic mt-1">"{b.notes}"</p>}
                   </div>
-                  <div className="text-right rtl:text-left">
+                  <div className="text-right rtl:text-left flex flex-col items-end gap-2">
                     <span className={`text-xs font-medium px-3 py-1 rounded-full ${STATUS_COLORS[b.status as BookingStatus]}`}>
                       {STATUS_LABELS[b.status as BookingStatus]}
                     </span>
-                    <p className="font-semibold text-blue-600 mt-2">₪{b.price}</p>
+                    <p className="font-semibold text-blue-600">₪{b.price}</p>
+                    <Link href={`/bookings/${b.id}`} className="text-xs text-blue-500 hover:underline">
+                      פרטים ופעולות
+                    </Link>
                   </div>
                 </div>
               </div>
