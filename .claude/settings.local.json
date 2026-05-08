@@ -15,7 +15,12 @@
       "Bash(git commit -m 'Fix implicit any type in middleware setAll cookie handler *)",
       "Bash(git commit *)",
       "Bash(git pull *)",
-      "Bash(git stash *)"
+      "Bash(git stash *)",
+      "Bash(rm app/api/auth/logout/route.ts)",
+      "Bash(rmdir app/api/auth/logout)",
+      "Bash(rmdir app/api/auth)",
+      "Bash(rmdir app/api)",
+      "Bash(rm app/logout/page.tsx)"
     ]
   }
 }
