@@ -1,13 +1,12 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
-import { Suspense } from "react";
+import { Mail } from "lucide-react";
 
 function RegisterForm() {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const defaultRole = searchParams.get("role") === "cleaner" ? "cleaner" : "client";
 
@@ -19,6 +18,7 @@ function RegisterForm() {
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [done, setDone] = useState(false);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
@@ -35,6 +35,7 @@ function RegisterForm() {
       password: form.password,
       options: {
         data: { full_name: form.full_name, role: form.role },
+        emailRedirectTo: `${window.location.origin}/auth/confirm`,
       },
     });
 
@@ -44,15 +45,34 @@ function RegisterForm() {
       return;
     }
 
-    router.push("/dashboard");
-    router.refresh();
+    setDone(true);
+  }
+
+  if (done) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-10 w-full max-w-md text-center">
+          <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-5">
+            <Mail className="text-blue-600" size={32} />
+          </div>
+          <h1 className="text-2xl font-bold mb-2">בדוק את האימייל שלך</h1>
+          <p className="text-gray-500 mb-2">
+            שלחנו קישור אימות לכתובת:
+          </p>
+          <p className="font-semibold text-gray-800 mb-6">{form.email}</p>
+          <p className="text-gray-400 text-sm">
+            לחץ על הקישור באימייל כדי לאשר את החשבון ולהתחיל.
+          </p>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 w-full max-w-md">
         <h1 className="text-2xl font-bold mb-1">צור את החשבון שלך</h1>
-        <p className="text-gray-500 mb-6">הצטרף לקהילת קלין מאץ'</p>
+        <p className="text-gray-500 mb-6">הצטרף לקהילת קלין מאץ&apos;</p>
 
         {error && (
           <div className="bg-red-50 text-red-700 rounded-lg p-3 mb-4 text-sm">{error}</div>

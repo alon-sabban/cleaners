@@ -1,5 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
+import Link from "next/link";
+import { AlertCircle } from "lucide-react";
 import { BookingStatus } from "@/types";
 
 const STATUS_COLORS: Record<BookingStatus, string> = {
@@ -31,6 +33,12 @@ export default async function CleanerDashboardPage() {
 
   if (profile?.role !== "cleaner") redirect("/dashboard/client");
 
+  const { data: cleanerProfile } = await supabase
+    .from("cleaner_profiles")
+    .select("id")
+    .eq("user_id", user.id)
+    .single();
+
   const { data: bookings } = await supabase
     .from("bookings")
     .select("*, client_profile:profiles!bookings_client_id_fkey(full_name, phone)")
@@ -48,6 +56,24 @@ export default async function CleanerDashboardPage() {
         <h1 className="text-3xl font-bold">לוח בקרה למנקה</h1>
         <p className="text-gray-500">ברוך שובך, {profile?.full_name}</p>
       </div>
+
+      {!cleanerProfile && (
+        <div className="bg-amber-50 border border-amber-200 rounded-xl p-5 mb-8 flex items-start gap-4">
+          <AlertCircle className="text-amber-500 shrink-0 mt-0.5" size={20} />
+          <div className="flex-1">
+            <p className="font-semibold text-amber-800">הפרופיל שלך אינו שלם</p>
+            <p className="text-amber-700 text-sm mt-0.5">
+              כדי להופיע בחיפוש ולקבל הזמנות, עליך להשלים את פרטי הפרופיל שלך.
+            </p>
+          </div>
+          <Link
+            href="/dashboard/cleaner/setup"
+            className="bg-amber-500 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-amber-600 transition-colors shrink-0"
+          >
+            השלם פרופיל
+          </Link>
+        </div>
+      )}
 
       {/* Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">

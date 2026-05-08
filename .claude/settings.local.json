@@ -5,7 +5,15 @@
       "Bash(git --version)",
       "Bash(git init *)",
       "Bash(git add *)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(git remote *)",
+      "Bash(git branch *)",
+      "Bash(git push *)",
+      "Bash(git commit -m 'Fix Supabase profile array type mismatch in booking page *)",
+      "Bash(git commit -m 'Fix implicit any type on setAll cookies parameter *)",
+      "Bash(git commit -m 'Use CookieOptions type from @supabase/ssr for setAll parameter *)",
+      "Bash(git commit -m 'Fix implicit any type in middleware setAll cookie handler *)",
+      "Bash(git commit *)"
     ]
   }
 }
