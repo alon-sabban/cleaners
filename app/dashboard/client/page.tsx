@@ -26,7 +26,7 @@ export default async function ClientDashboardPage() {
 
   const { data: bookings } = await supabase
     .from("bookings")
-    .select("*, cleaner_profile:cleaner_profiles(id, hourly_rate, profile:profiles(full_name))")
+    .select("*, cleaner_profile:profiles!bookings_cleaner_id_fkey(full_name)")
     .eq("client_id", user.id)
     .order("date", { ascending: false });
 
@@ -78,11 +78,11 @@ export default async function ClientDashboardPage() {
         {upcoming.length > 0 ? (
           <div className="space-y-3">
             {upcoming.map((b) => {
-              const cp = b.cleaner_profile as { id: string; profile: { full_name: string } } | null;
+              const cp = b.cleaner_profile as { full_name: string } | null;
               return (
                 <div key={b.id} className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 flex items-center justify-between">
                   <div>
-                    <p className="font-medium">{cp?.profile?.full_name ?? "Cleaner"}</p>
+                    <p className="font-medium">{cp?.full_name ?? "מנקה"}</p>
                     <p className="text-sm text-gray-500">
                       {b.service_type} · {new Date(b.date).toLocaleDateString()} at {b.time}
                     </p>
@@ -115,11 +115,11 @@ export default async function ClientDashboardPage() {
         {past.length > 0 ? (
           <div className="space-y-3">
             {past.map((b) => {
-              const cp = b.cleaner_profile as { id: string; profile: { full_name: string } } | null;
+              const cp = b.cleaner_profile as { full_name: string } | null;
               return (
                 <div key={b.id} className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 flex items-center justify-between opacity-80">
                   <div>
-                    <p className="font-medium">{cp?.profile?.full_name ?? "Cleaner"}</p>
+                    <p className="font-medium">{cp?.full_name ?? "מנקה"}</p>
                     <p className="text-sm text-gray-500">
                       {b.service_type} · {new Date(b.date).toLocaleDateString()}
                     </p>
