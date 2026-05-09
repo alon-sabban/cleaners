@@ -10,7 +10,7 @@ import { getClientLang, Lang } from "@/lib/i18n";
 const LABELS = {
   he: {
     title: "צור את החשבון שלך",
-    subtitle: "הצטרף לקהילת קלין מאץ'",
+    subtitle: "הצטרף לקהילת קליןלי",
     fullName: "שם מלא",
     fullNamePlaceholder: "שמך",
     email: "דואר אלקטרוני",
@@ -31,7 +31,7 @@ const LABELS = {
   },
   en: {
     title: "Create your account",
-    subtitle: "Join the CleanMatch community",
+    subtitle: "Join the CleanLy community",
     fullName: "Full Name",
     fullNamePlaceholder: "Your name",
     email: "Email",

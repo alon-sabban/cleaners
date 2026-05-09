@@ -8,7 +8,7 @@ import { getLang } from "@/lib/language";
 const geist = Geist({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "CleanMatch — Find trusted cleaners in your community",
+  title: "CleanLy — Find trusted cleaners in your community",
   description: "Connect with vetted and community-trusted cleaning professionals. Book in minutes.",
 };
 
