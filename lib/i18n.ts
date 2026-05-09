@@ -1,0 +1,258 @@
+export type Lang = "he" | "en";
+
+export const translations = {
+  he: {
+    // Navbar
+    findCleaners: "מצא מנקים",
+    dashboard: "לוח הבקרה",
+    signIn: "התחבר",
+    getStarted: "התחל עכשיו",
+    signOut: "התנתק",
+    // Client dashboard
+    myDashboard: "לוח הבקרה שלי",
+    welcomeBack: "ברוך שובך",
+    newBooking: "הזמנה חדשה",
+    totalBookings: 'סה"כ הזמנות',
+    upcoming: "קרובות",
+    completed: "הושלמו",
+    upcomingBookings: "הזמנות קרובות",
+    pastBookings: "הזמנות קודמות",
+    noUpcomingBookings: "אין הזמנות קרובות.",
+    findCleaner: "מצא מנקה",
+    noPastBookings: "אין הזמנות קודמות.",
+    detailsMessages: "פרטים והודעות",
+    // Cleaner dashboard
+    cleanerDashboard: "לוח בקרה למנקה",
+    pending: "ממתין",
+    confirmed: "מאושר",
+    totalEarnings: 'סה"כ הכנסות',
+    allBookingRequests: "כל בקשות ההזמנה",
+    noBookingRequests: "אין בקשות הזמנה עדיין.",
+    detailsActions: "פרטים ופעולות",
+    profileIncomplete: "הפרופיל שלך אינו שלם",
+    completeProfileDesc: "כדי להופיע בחיפוש ולקבל הזמנות, עליך להשלים את פרטי הפרופיל שלך.",
+    completeProfile: "השלם פרופיל",
+    // Status labels
+    statusPending: "ממתין",
+    statusConfirmed: "מאושר",
+    statusInProgress: "בתהליך",
+    statusCompleted: "הושלם",
+    statusCancelled: "בוטל",
+    statusPendingApproval: "ממתין לאישור",
+    // Booking actions
+    actions: "פעולות",
+    confirmBooking: "אשר הזמנה",
+    confirming: "מאשר...",
+    rejectBooking: "דחה הזמנה",
+    rejecting: "דוחה...",
+    markInProgress: "סמן כבתהליך",
+    updating: "מעדכן...",
+    markCompleted: "סמן כהושלם",
+    completing: "מסיים...",
+    cancelBooking: "בטל הזמנה",
+    cancelling: "מבטל...",
+    statusUpdateError: "שגיאה בעדכון הסטטוס",
+    // Booking detail
+    bookingDetails: "פרטי הזמנה",
+    price: "מחיר",
+    clientDetails: "פרטי הלקוח",
+    cleanerDetails: "פרטי המנקה",
+    verifiedCleaner: "מנקה מאושר",
+    messagesTitle: "הודעות",
+    // Chat
+    noMessages: "אין הודעות עדיין. שלח הודעה ראשונה!",
+    me: "אני",
+    writeMessage: "כתוב הודעה...",
+    // Cleaners list
+    findCleanersTitle: "מצא מנקה",
+    findCleanersSubtitle: "עיין במקצועני ניקיון מבוקרים מהקהילה",
+    noCleanersFound: "לא נמצאו מנקים התואמים לקריטריונים שלך.",
+    tryChangingFilters: "נסה לשנות את הפילטרים.",
+    bookNow: "הזמן עכשיו",
+    perHour: "לשעה",
+    // Home
+    heroTitle: "מצא מנקים אמינים\nבקהילה שלך",
+    heroSubtitle: "הזמן מקצועני ניקיון מבוקרים ומהימנים על ידי הקהילה. מהיר, קל, אמין.",
+    offerServices: "הצע את שירותיך",
+    whyCleanMatch: "למה קלין מאץ'?",
+    availableServices: "שירותים זמינים",
+    servicesSubtitle: "מה שצריך לנקות, יש לנו מישהו לזה.",
+    readyToStart: "מוכן להתחיל?",
+    ctaDesc: "הצטרף למאות חברי קהילה שכבר משתמשים בקלין מאץ'.",
+    createFreeAccount: "צור חשבון חינמי",
+    feature1Title: "אנשי מקצוע מבוקרים",
+    feature1Desc: "כל מנקה עובר בדיקת רקע ומדורג על ידי הקהילה.",
+    feature2Title: "מדורגים ומוערכים",
+    feature2Desc: "ביקורות אמיתיות מחברי קהילה אמיתיים.",
+    feature3Title: "הזמן תוך דקות",
+    feature3Desc: "בחר את המנקה שלך, קבע זמן, אשר. סיום.",
+    // Cleaner setup
+    editProfile: "עדכן את הפרופיל שלך",
+    setupProfileTitle: "השלם את הפרופיל שלך",
+    setupProfileDesc: "פרטים אלו יוצגו ללקוחות המחפשים מנקה.",
+    location: "מיקום",
+    locationPlaceholder: "עיר או אזור, למשל: תל אביב",
+    hourlyRate: "מחיר לשעה (₪)",
+    hourlyRatePlaceholder: "למשל: 80",
+    offeredServices: "שירותים מוצעים",
+    shortBio: "תיאור קצר (אופציונלי)",
+    bioPlaceholder: "ספר קצת על עצמך ועל הניסיון שלך...",
+    selectAtLeastOne: "בחר לפחות שירות אחד.",
+    updateProfile: "עדכן פרופיל",
+    saveAndContinue: "שמור והמשך",
+    saving: "שומר...",
+    // Login
+    welcomeBack2: "ברוך שובך",
+    loginDesc: "התחבר לחשבון קלין מאץ' שלך",
+    emailLabel: "דואר אלקטרוני",
+    passwordLabel: "סיסמה",
+    signingIn: "מתחבר...",
+    noAccount: "אין לך חשבון?",
+    register: "הירשם",
+    // Misc
+    refresh: "רענן",
+    cleaner: "מנקה",
+    client: "לקוח",
+    at: "ב-",
+  },
+  en: {
+    // Navbar
+    findCleaners: "Find Cleaners",
+    dashboard: "Dashboard",
+    signIn: "Sign In",
+    getStarted: "Get Started",
+    signOut: "Sign Out",
+    // Client dashboard
+    myDashboard: "My Dashboard",
+    welcomeBack: "Welcome back",
+    newBooking: "New Booking",
+    totalBookings: "Total Bookings",
+    upcoming: "Upcoming",
+    completed: "Completed",
+    upcomingBookings: "Upcoming Bookings",
+    pastBookings: "Past Bookings",
+    noUpcomingBookings: "No upcoming bookings.",
+    findCleaner: "Find a cleaner",
+    noPastBookings: "No past bookings.",
+    detailsMessages: "Details & Messages",
+    // Cleaner dashboard
+    cleanerDashboard: "Cleaner Dashboard",
+    pending: "Pending",
+    confirmed: "Confirmed",
+    totalEarnings: "Total Earnings",
+    allBookingRequests: "All Booking Requests",
+    noBookingRequests: "No booking requests yet.",
+    detailsActions: "Details & Actions",
+    profileIncomplete: "Your profile is incomplete",
+    completeProfileDesc: "To appear in search results and receive bookings, you need to complete your profile.",
+    completeProfile: "Complete Profile",
+    // Status labels
+    statusPending: "Pending",
+    statusConfirmed: "Confirmed",
+    statusInProgress: "In Progress",
+    statusCompleted: "Completed",
+    statusCancelled: "Cancelled",
+    statusPendingApproval: "Pending Approval",
+    // Booking actions
+    actions: "Actions",
+    confirmBooking: "Confirm Booking",
+    confirming: "Confirming...",
+    rejectBooking: "Reject Booking",
+    rejecting: "Rejecting...",
+    markInProgress: "Mark as In Progress",
+    updating: "Updating...",
+    markCompleted: "Mark as Completed",
+    completing: "Completing...",
+    cancelBooking: "Cancel Booking",
+    cancelling: "Cancelling...",
+    statusUpdateError: "Error updating status",
+    // Booking detail
+    bookingDetails: "Booking Details",
+    price: "Price",
+    clientDetails: "Client Details",
+    cleanerDetails: "Cleaner Details",
+    verifiedCleaner: "Verified Cleaner",
+    messagesTitle: "Messages",
+    // Chat
+    noMessages: "No messages yet. Send the first one!",
+    me: "Me",
+    writeMessage: "Write a message...",
+    // Cleaners list
+    findCleanersTitle: "Find a Cleaner",
+    findCleanersSubtitle: "Browse vetted cleaning professionals from the community",
+    noCleanersFound: "No cleaners match your search criteria.",
+    tryChangingFilters: "Try adjusting the filters.",
+    bookNow: "Book Now",
+    perHour: "/hr",
+    // Home
+    heroTitle: "Find trusted cleaners\nin your community",
+    heroSubtitle: "Book vetted and community-trusted cleaning professionals. Fast, easy, reliable.",
+    offerServices: "Offer Your Services",
+    whyCleanMatch: "Why CleanMatch?",
+    availableServices: "Available Services",
+    servicesSubtitle: "Whatever needs cleaning, we have someone for it.",
+    readyToStart: "Ready to get started?",
+    ctaDesc: "Join hundreds of community members already using CleanMatch.",
+    createFreeAccount: "Create Free Account",
+    feature1Title: "Vetted Professionals",
+    feature1Desc: "Every cleaner is background-checked and community-rated.",
+    feature2Title: "Rated & Reviewed",
+    feature2Desc: "Real reviews from real community members.",
+    feature3Title: "Book in Minutes",
+    feature3Desc: "Pick your cleaner, set a time, confirm. Done.",
+    // Cleaner setup
+    editProfile: "Update Your Profile",
+    setupProfileTitle: "Complete Your Profile",
+    setupProfileDesc: "These details will be shown to clients looking for a cleaner.",
+    location: "Location",
+    locationPlaceholder: "City or area, e.g. Tel Aviv",
+    hourlyRate: "Hourly Rate (₪)",
+    hourlyRatePlaceholder: "e.g. 80",
+    offeredServices: "Offered Services",
+    shortBio: "Short Bio (optional)",
+    bioPlaceholder: "Tell us a bit about yourself and your experience...",
+    selectAtLeastOne: "Please select at least one service.",
+    updateProfile: "Update Profile",
+    saveAndContinue: "Save & Continue",
+    saving: "Saving...",
+    // Login
+    welcomeBack2: "Welcome back",
+    loginDesc: "Sign in to your CleanMatch account",
+    emailLabel: "Email",
+    passwordLabel: "Password",
+    signingIn: "Signing in...",
+    noAccount: "Don't have an account?",
+    register: "Register",
+    // Misc
+    refresh: "Refresh",
+    cleaner: "Cleaner",
+    client: "Client",
+    at: "at",
+  },
+} as const;
+
+export type TranslationKey = keyof typeof translations.he;
+
+export function t(key: TranslationKey, lang: Lang): string {
+  return (translations[lang] as Record<string, string>)[key] ?? (translations.he as Record<string, string>)[key];
+}
+
+const SERVICE_NAMES: Record<string, string> = {
+  "ניקיון בית": "Home Cleaning",
+  "ניקיון עמוק": "Deep Cleaning",
+  "ניקיון משרד": "Office Cleaning",
+  "לאחר שיפוץ": "Post-Renovation Cleaning",
+  "כניסה/יציאה מדירה": "Move In/Out Cleaning",
+  "ניקיון חלונות": "Window Cleaning",
+};
+
+export function tService(hebrewName: string, lang: Lang): string {
+  if (lang === "en") return SERVICE_NAMES[hebrewName] ?? hebrewName;
+  return hebrewName;
+}
+
+export function getClientLang(): Lang {
+  if (typeof document === "undefined") return "he";
+  const match = document.cookie.match(/(?:^|; )lang=([^;]*)/);
+  return match?.[1] === "en" ? "en" : "he";
+}

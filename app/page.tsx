@@ -1,33 +1,49 @@
 import Link from "next/link";
 import { Search, Star, Shield, Clock } from "lucide-react";
+import { getLang } from "@/lib/language";
+import { t } from "@/lib/i18n";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const lang = await getLang();
+
   const features = [
     {
       icon: Shield,
-      title: "אנשי מקצוע מבוקרים",
-      desc: "כל מנקה עובר בדיקת רקע ומדורג על ידי הקהילה.",
+      title: t("feature1Title", lang),
+      desc: t("feature1Desc", lang),
     },
     {
       icon: Star,
-      title: "מדורגים ומוערכים",
-      desc: "ביקורות אמיתיות מחברי קהילה אמיתיים.",
+      title: t("feature2Title", lang),
+      desc: t("feature2Desc", lang),
     },
     {
       icon: Clock,
-      title: "הזמן תוך דקות",
-      desc: "בחר את המנקה שלך, קבע זמן, אשר. סיום.",
+      title: t("feature3Title", lang),
+      desc: t("feature3Desc", lang),
     },
   ];
 
-  const services = [
-    "ניקיון בית",
-    "ניקיון עמוק",
-    "ניקיון משרד",
-    "לאחר שיפוץ",
-    "כניסה/יציאה מדירה",
-    "ניקיון חלונות",
-  ];
+  const services =
+    lang === "en"
+      ? [
+          { label: "Home Cleaning", he: "ניקיון בית" },
+          { label: "Deep Cleaning", he: "ניקיון עמוק" },
+          { label: "Office Cleaning", he: "ניקיון משרד" },
+          { label: "Post-Renovation", he: "לאחר שיפוץ" },
+          { label: "Move In/Out", he: "כניסה/יציאה מדירה" },
+          { label: "Window Cleaning", he: "ניקיון חלונות" },
+        ]
+      : [
+          { label: "ניקיון בית", he: "ניקיון בית" },
+          { label: "ניקיון עמוק", he: "ניקיון עמוק" },
+          { label: "ניקיון משרד", he: "ניקיון משרד" },
+          { label: "לאחר שיפוץ", he: "לאחר שיפוץ" },
+          { label: "כניסה/יציאה מדירה", he: "כניסה/יציאה מדירה" },
+          { label: "ניקיון חלונות", he: "ניקיון חלונות" },
+        ];
+
+  const [heroLine1, heroLine2] = t("heroTitle", lang).split("\n");
 
   return (
     <div>
@@ -35,10 +51,10 @@ export default function HomePage() {
       <section className="bg-gradient-to-br from-blue-600 to-blue-800 text-white py-24 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-5xl font-bold mb-6">
-            מצא מנקים אמינים<br />בקהילה שלך
+            {heroLine1}<br />{heroLine2}
           </h1>
           <p className="text-xl text-blue-100 mb-10">
-            הזמן מקצועני ניקיון מבוקרים ומהימנים על ידי הקהילה. מהיר, קל, אמין.
+            {t("heroSubtitle", lang)}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -46,13 +62,13 @@ export default function HomePage() {
               className="bg-white text-blue-700 font-semibold px-8 py-4 rounded-xl hover:bg-blue-50 transition-colors flex items-center justify-center gap-2"
             >
               <Search size={20} />
-              מצא מנקה
+              {t("findCleaners", lang)}
             </Link>
             <Link
               href="/register?role=cleaner"
               className="border-2 border-white text-white font-semibold px-8 py-4 rounded-xl hover:bg-blue-700 transition-colors"
             >
-              הצע את שירותיך
+              {t("offerServices", lang)}
             </Link>
           </div>
         </div>
@@ -61,7 +77,7 @@ export default function HomePage() {
       {/* Features */}
       <section className="py-20 px-4 bg-gray-50">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">למה קלין מאץ'?</h2>
+          <h2 className="text-3xl font-bold text-center mb-12">{t("whyCleanMatch", lang)}</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {features.map(({ icon: Icon, title, desc }) => (
               <div key={title} className="bg-white rounded-2xl p-8 shadow-sm text-center">
@@ -79,16 +95,16 @@ export default function HomePage() {
       {/* Services */}
       <section className="py-20 px-4">
         <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-4">שירותים זמינים</h2>
-          <p className="text-gray-600 mb-10">מה שצריך לנקות, יש לנו מישהו לזה.</p>
+          <h2 className="text-3xl font-bold mb-4">{t("availableServices", lang)}</h2>
+          <p className="text-gray-600 mb-10">{t("servicesSubtitle", lang)}</p>
           <div className="flex flex-wrap justify-center gap-3">
             {services.map((s) => (
               <Link
-                key={s}
-                href={`/cleaners?service=${encodeURIComponent(s)}`}
+                key={s.he}
+                href={`/cleaners?service=${encodeURIComponent(s.he)}`}
                 className="bg-blue-50 text-blue-700 font-medium px-5 py-2.5 rounded-full hover:bg-blue-100 transition-colors"
               >
-                {s}
+                {s.label}
               </Link>
             ))}
           </div>
@@ -98,15 +114,13 @@ export default function HomePage() {
       {/* CTA */}
       <section className="py-20 px-4 bg-blue-600 text-white text-center">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-3xl font-bold mb-4">מוכן להתחיל?</h2>
-          <p className="text-blue-100 mb-8">
-            הצטרף למאות חברי קהילה שכבר משתמשים בקלין מאץ'.
-          </p>
+          <h2 className="text-3xl font-bold mb-4">{t("readyToStart", lang)}</h2>
+          <p className="text-blue-100 mb-8">{t("ctaDesc", lang)}</p>
           <Link
             href="/register"
             className="bg-white text-blue-700 font-semibold px-8 py-4 rounded-xl hover:bg-blue-50 transition-colors inline-block"
           >
-            צור חשבון חינמי
+            {t("createFreeAccount", lang)}
           </Link>
         </div>
       </section>

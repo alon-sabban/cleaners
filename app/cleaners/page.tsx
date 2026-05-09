@@ -2,6 +2,8 @@ import { createClient } from "@/lib/supabase/server";
 import CleanerCard from "@/components/cleaners/CleanerCard";
 import SearchFilters from "@/components/cleaners/SearchFilters";
 import { CleanerProfile } from "@/types";
+import { getLang } from "@/lib/language";
+import { t } from "@/lib/i18n";
 
 export default async function CleanersPage({
   searchParams,
@@ -10,6 +12,7 @@ export default async function CleanersPage({
 }) {
   const params = await searchParams;
   const supabase = await createClient();
+  const lang = await getLang();
 
   let query = supabase
     .from("cleaner_profiles")
@@ -31,8 +34,8 @@ export default async function CleanersPage({
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
-      <h1 className="text-3xl font-bold mb-2">מצא מנקה</h1>
-      <p className="text-gray-500 mb-8">עיין במקצועני ניקיון מבוקרים מהקהילה</p>
+      <h1 className="text-3xl font-bold mb-2">{t("findCleanersTitle", lang)}</h1>
+      <p className="text-gray-500 mb-8">{t("findCleanersSubtitle", lang)}</p>
 
       <SearchFilters />
 
@@ -44,8 +47,8 @@ export default async function CleanersPage({
         </div>
       ) : (
         <div className="text-center py-20 text-gray-400">
-          <p className="text-lg">לא נמצאו מנקים התואמים לקריטריונים שלך.</p>
-          <p className="text-sm mt-2">נסה לשנות את הפילטרים.</p>
+          <p className="text-lg">{t("noCleanersFound", lang)}</p>
+          <p className="text-sm mt-2">{t("tryChangingFilters", lang)}</p>
         </div>
       )}
     </div>

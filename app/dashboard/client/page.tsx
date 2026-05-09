@@ -3,6 +3,8 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { BookingStatus } from "@/types";
 import RefreshButton from "@/components/dashboard/RefreshButton";
+import { getLang } from "@/lib/language";
+import { t, tService } from "@/lib/i18n";
 
 const STATUS_COLORS: Record<BookingStatus, string> = {
   pending: "bg-yellow-100 text-yellow-700",
@@ -12,18 +14,20 @@ const STATUS_COLORS: Record<BookingStatus, string> = {
   cancelled: "bg-gray-100 text-gray-500",
 };
 
-const STATUS_LABELS: Record<BookingStatus, string> = {
-  pending: "ממתין",
-  confirmed: "מאושר",
-  in_progress: "בתהליך",
-  completed: "הושלם",
-  cancelled: "בוטל",
-};
-
 export default async function ClientDashboardPage() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
+
+  const lang = await getLang();
+
+  const STATUS_LABELS: Record<BookingStatus, string> = {
+    pending: t("statusPending", lang),
+    confirmed: t("statusConfirmed", lang),
+    in_progress: t("statusInProgress", lang),
+    completed: t("statusCompleted", lang),
+    cancelled: t("statusCancelled", lang),
+  };
 
   const { data: bookings } = await supabase
     .from("bookings")
@@ -48,24 +52,26 @@ export default async function ClientDashboardPage() {
     <div className="max-w-4xl mx-auto px-4 py-12">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold">לוח הבקרה שלי</h1>
-          <p className="text-gray-500">ברוך שובך, {profile?.full_name}</p>
+          <h1 className="text-3xl font-bold">{t("myDashboard", lang)}</h1>
+          <p className="text-gray-500">{t("welcomeBack", lang)}, {profile?.full_name}</p>
         </div>
-        <Link
-          href="/bookings/new"
-          className="bg-blue-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-blue-700 transition-colors"
-        >
-          הזמנה חדשה
-        </Link>
-        <RefreshButton />
+        <div className="flex items-center gap-3">
+          <Link
+            href="/bookings/new"
+            className="bg-blue-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-blue-700 transition-colors"
+          >
+            {t("newBooking", lang)}
+          </Link>
+          <RefreshButton label={t("refresh", lang)} />
+        </div>
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-3 gap-4 mb-8">
         {[
-          { label: "סה\"כ הזמנות", value: bookings?.length ?? 0 },
-          { label: "קרובות", value: upcoming.length },
-          { label: "הושלמו", value: past.filter((b) => b.status === "completed").length },
+          { label: t("totalBookings", lang), value: bookings?.length ?? 0 },
+          { label: t("upcoming", lang), value: upcoming.length },
+          { label: t("completed", lang), value: past.filter((b) => b.status === "completed").length },
         ].map(({ label, value }) => (
           <div key={label} className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 text-center">
             <div className="text-3xl font-bold text-blue-600">{value}</div>
@@ -76,7 +82,7 @@ export default async function ClientDashboardPage() {
 
       {/* Upcoming */}
       <section className="mb-8">
-        <h2 className="text-xl font-semibold mb-4">הזמנות קרובות</h2>
+        <h2 className="text-xl font-semibold mb-4">{t("upcomingBookings", lang)}</h2>
         {upcoming.length > 0 ? (
           <div className="space-y-3">
             {upcoming.map((b) => {
@@ -84,9 +90,9 @@ export default async function ClientDashboardPage() {
               return (
                 <div key={b.id} className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 flex items-center justify-between">
                   <div>
-                    <p className="font-medium">{cp?.full_name ?? "מנקה"}</p>
+                    <p className="font-medium">{cp?.full_name ?? t("cleaner", lang)}</p>
                     <p className="text-sm text-gray-500">
-                      {b.service_type} · {new Date(b.date).toLocaleDateString()} at {b.time}
+                      {tService(b.service_type, lang)} · {new Date(b.date).toLocaleDateString()} {t("at", lang)} {b.time}
                     </p>
                     <p className="text-sm text-gray-400">{b.address}</p>
                   </div>
@@ -96,7 +102,7 @@ export default async function ClientDashboardPage() {
                     </span>
                     <span className="font-semibold text-blue-600">₪{b.price}</span>
                     <Link href={`/bookings/${b.id}`} className="text-xs text-blue-500 hover:underline">
-                      פרטים והודעות
+                      {t("detailsMessages", lang)}
                     </Link>
                   </div>
                 </div>
@@ -105,15 +111,15 @@ export default async function ClientDashboardPage() {
           </div>
         ) : (
           <div className="bg-gray-50 rounded-xl p-8 text-center text-gray-400">
-            אין הזמנות קרובות.{" "}
-            <Link href="/cleaners" className="text-blue-600 hover:underline">מצא מנקה</Link>
+            {t("noUpcomingBookings", lang)}{" "}
+            <Link href="/cleaners" className="text-blue-600 hover:underline">{t("findCleaner", lang)}</Link>
           </div>
         )}
       </section>
 
       {/* Past */}
       <section>
-        <h2 className="text-xl font-semibold mb-4">הזמנות קודמות</h2>
+        <h2 className="text-xl font-semibold mb-4">{t("pastBookings", lang)}</h2>
         {past.length > 0 ? (
           <div className="space-y-3">
             {past.map((b) => {
@@ -121,9 +127,9 @@ export default async function ClientDashboardPage() {
               return (
                 <div key={b.id} className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 flex items-center justify-between opacity-80">
                   <div>
-                    <p className="font-medium">{cp?.full_name ?? "מנקה"}</p>
+                    <p className="font-medium">{cp?.full_name ?? t("cleaner", lang)}</p>
                     <p className="text-sm text-gray-500">
-                      {b.service_type} · {new Date(b.date).toLocaleDateString()}
+                      {tService(b.service_type, lang)} · {new Date(b.date).toLocaleDateString()}
                     </p>
                   </div>
                   <div className="flex items-center gap-3">
@@ -137,7 +143,7 @@ export default async function ClientDashboardPage() {
             })}
           </div>
         ) : (
-          <p className="text-gray-400 text-sm">אין הזמנות קודמות.</p>
+          <p className="text-gray-400 text-sm">{t("noPastBookings", lang)}</p>
         )}
       </section>
     </div>

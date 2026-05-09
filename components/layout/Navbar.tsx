@@ -1,10 +1,24 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import { getLang } from "@/lib/language";
+import { t } from "@/lib/i18n";
 import SignOutButton from "@/components/auth/SignOutButton";
+import LanguageToggle from "@/components/layout/LanguageToggle";
 
 export default async function Navbar() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
+  const lang = await getLang();
+
+  let fullName: string | null = null;
+  if (user) {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("full_name")
+      .eq("id", user.id)
+      .single();
+    fullName = profile?.full_name ?? null;
+  }
 
   return (
     <nav className="bg-white border-b border-gray-100 sticky top-0 z-50">
@@ -13,9 +27,9 @@ export default async function Navbar() {
           CleanMatch
         </Link>
 
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4">
           <Link href="/cleaners" className="text-gray-600 hover:text-gray-900 text-sm font-medium">
-            מצא מנקים
+            {t("findCleaners", lang)}
           </Link>
 
           {user ? (
@@ -24,23 +38,29 @@ export default async function Navbar() {
                 href="/dashboard"
                 className="text-gray-600 hover:text-gray-900 text-sm font-medium"
               >
-                לוח הבקרה
+                {t("dashboard", lang)}
               </Link>
-              <SignOutButton />
+              {fullName && (
+                <span className="text-sm text-gray-600 border border-gray-200 px-3 py-1.5 rounded-lg">
+                  {fullName}
+                </span>
+              )}
+              <SignOutButton label={t("signOut", lang)} />
             </>
           ) : (
             <>
               <Link href="/login" className="text-gray-600 hover:text-gray-900 text-sm font-medium">
-                התחבר
+                {t("signIn", lang)}
               </Link>
               <Link
                 href="/register"
                 className="bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
               >
-                התחל עכשיו
+                {t("getStarted", lang)}
               </Link>
             </>
           )}
+          <LanguageToggle lang={lang} />
         </div>
       </div>
     </nav>
