@@ -77,7 +77,7 @@ export default async function HomePage() {
       {/* Features */}
       <section className="py-20 px-4 bg-gray-50">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">{t("whyCleanMatch", lang)}</h2>
+          <h2 className="text-3xl font-bold text-center mb-12">{t("whyCleanLy", lang)}</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {features.map(({ icon: Icon, title, desc }) => (
               <div key={title} className="bg-white rounded-2xl p-8 shadow-sm text-center">
