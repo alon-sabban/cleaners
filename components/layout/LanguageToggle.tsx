@@ -1,15 +1,12 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import type { Lang } from "@/lib/i18n";
 
 export default function LanguageToggle({ lang }: { lang: Lang }) {
-  const router = useRouter();
-
   function toggle() {
     const next = lang === "he" ? "en" : "he";
     document.cookie = `lang=${next}; path=/; max-age=31536000; SameSite=Lax`;
-    router.refresh();
+    window.location.reload();
   }
 
   return (
