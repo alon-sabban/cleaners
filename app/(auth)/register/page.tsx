@@ -10,7 +10,7 @@ import { getClientLang, Lang } from "@/lib/i18n";
 const LABELS = {
   he: {
     title: "צור את החשבון שלך",
-    subtitle: "הצטרף לקהילת קליןלי",
+    subtitle: "הצטרף לקהילת קלינלי",
     fullName: "שם מלא",
     fullNamePlaceholder: "שמך",
     email: "דואר אלקטרוני",

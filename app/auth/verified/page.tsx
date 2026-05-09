@@ -55,8 +55,8 @@ export default async function VerifiedPage({
         <h1 className="text-2xl font-bold mb-2">האימייל אושר!</h1>
         <p className="text-gray-500 mb-8">
           {role === "cleaner"
-            ? "ברוך הבא לקליןלי! כדי להופיע בחיפוש, השלם את פרטי הפרופיל שלך."
-            : "ברוך הבא לקליןלי! אתה מוכן להתחיל."}
+            ? "ברוך הבא לקלינלי! כדי להופיע בחיפוש, השלם את פרטי הפרופיל שלך."
+            : "ברוך הבא לקלינלי! אתה מוכן להתחיל."}
         </p>
         {role === "cleaner" ? (
           <Link
