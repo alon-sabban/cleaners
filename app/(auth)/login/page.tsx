@@ -38,7 +38,10 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-stone-50 flex items-center justify-center px-4">
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 w-full max-w-md">
+      <div className="bg-white rounded-2xl shadow-md border border-stone-100 p-8 w-full max-w-md">
+        <div className="text-center mb-6">
+          <span className="text-2xl font-bold text-teal-600">CleanLy</span>
+        </div>
         <h1 className="text-2xl font-bold mb-1">{t("welcomeBack2", lang)}</h1>
         <p className="text-gray-500 mb-6">{t("loginDesc", lang)}</p>
 

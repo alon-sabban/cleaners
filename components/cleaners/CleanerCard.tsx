@@ -7,12 +7,12 @@ export default function CleanerCard({ cleaner }: { cleaner: CleanerProfile & { p
   const name = cleaner.profile?.full_name ?? "Cleaner";
   const avatar =
     cleaner.profile?.avatar_url ||
-    `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=3b82f6&color=fff&size=80`;
+    `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0d9488&color=fff&size=80`;
 
   return (
     <Link
       href={`/cleaners/${cleaner.id}`}
-      className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col gap-4"
+      className="bg-white rounded-2xl border border-stone-100 shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all p-5 flex flex-col gap-4"
     >
       <div className="flex items-start gap-4">
         <Image

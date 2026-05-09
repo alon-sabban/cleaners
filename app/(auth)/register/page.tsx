@@ -116,7 +116,7 @@ function RegisterForm() {
   if (awaitingEmail) {
     return (
       <div className="min-h-screen bg-stone-50 flex items-center justify-center px-4">
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-10 w-full max-w-md text-center">
+        <div className="bg-white rounded-2xl shadow-md border border-stone-100 p-10 w-full max-w-md text-center">
           <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-5">
             <Mail className="text-teal-600" size={32} />
           </div>
@@ -131,7 +131,10 @@ function RegisterForm() {
 
   return (
     <div className="min-h-screen bg-stone-50 flex items-center justify-center px-4">
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 w-full max-w-md">
+      <div className="bg-white rounded-2xl shadow-md border border-stone-100 p-8 w-full max-w-md">
+        <div className="text-center mb-6">
+          <span className="text-2xl font-bold text-teal-600">CleanLy</span>
+        </div>
         <h1 className="text-2xl font-bold mb-1">{L.title}</h1>
         <p className="text-gray-500 mb-6">{L.subtitle}</p>
 

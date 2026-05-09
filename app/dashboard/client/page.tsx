@@ -74,7 +74,7 @@ export default async function ClientDashboardPage() {
           { label: t("confirmed", lang), value: approved.length },
           { label: t("completed", lang), value: bookings?.filter((b) => b.status === "completed").length ?? 0 },
         ].map(({ label, value }) => (
-          <div key={label} className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 text-center">
+          <div key={label} className="bg-white rounded-xl border border-stone-100 shadow-md p-5 text-center">
             <div className="text-3xl font-bold text-teal-600">{value}</div>
             <div className="text-sm text-gray-500 mt-1">{label}</div>
           </div>
@@ -96,7 +96,7 @@ export default async function ClientDashboardPage() {
             {pending.map((b) => {
               const cp = b.cleaner_profile as { full_name: string } | null;
               return (
-                <div key={b.id} className="bg-white rounded-xl border border-gray-100 shadow-sm p-4">
+                <div key={b.id} className="bg-white rounded-xl border border-stone-100 shadow-md p-4">
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
                       <p className="font-medium truncate">{cp?.full_name ?? t("cleaner", lang)}</p>
@@ -141,7 +141,7 @@ export default async function ClientDashboardPage() {
             {approved.map((b) => {
               const cp = b.cleaner_profile as { full_name: string } | null;
               return (
-                <div key={b.id} className="bg-white rounded-xl border border-gray-100 shadow-sm p-4">
+                <div key={b.id} className="bg-white rounded-xl border border-stone-100 shadow-md p-4">
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
                       <p className="font-medium truncate">{cp?.full_name ?? t("cleaner", lang)}</p>
@@ -244,7 +244,7 @@ export default async function ClientDashboardPage() {
             {completedAll.map((b) => {
               const cp = b.cleaner_profile as { full_name: string } | null;
               return (
-                <div key={b.id} className="bg-white rounded-xl border border-gray-100 shadow-sm p-4 flex items-center justify-between">
+                <div key={b.id} className="bg-white rounded-xl border border-stone-100 shadow-md p-4 flex items-center justify-between">
                   <div className="min-w-0">
                     <p className="font-medium truncate">{cp?.full_name ?? t("cleaner", lang)}</p>
                     <p className="text-sm text-gray-500">

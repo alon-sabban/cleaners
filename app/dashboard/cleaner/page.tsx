@@ -54,7 +54,7 @@ export default async function CleanerDashboardPage() {
     const cp = b.client_profile as { full_name: string; phone: string | null } | null;
     const status = b.status as BookingStatus;
     return (
-      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-4">
+      <div className="bg-white rounded-xl border border-stone-100 shadow-md p-4">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
             <p className="font-medium truncate">{cp?.full_name ?? t("client", lang)}</p>
@@ -149,7 +149,7 @@ export default async function CleanerDashboardPage() {
           { label: t("completed", lang), value: bookings?.filter((b) => b.status === "completed").length ?? 0 },
           { label: t("totalEarnings", lang), value: `₪${totalEarnings.toFixed(0)}` },
         ].map(({ label, value }) => (
-          <div key={label} className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 text-center">
+          <div key={label} className="bg-white rounded-xl border border-stone-100 shadow-md p-5 text-center">
             <div className="text-2xl font-bold text-teal-600">{value}</div>
             <div className="text-sm text-gray-500 mt-1">{label}</div>
           </div>
