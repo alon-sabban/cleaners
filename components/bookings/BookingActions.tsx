@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -70,7 +70,7 @@ export default function BookingActions({ bookingId, status, isCleaner, lang }: B
           <button
             onClick={() => updateStatus("pending_completion")}
             disabled={loading !== null}
-            className="bg-blue-600 text-white font-semibold px-6 py-2.5 rounded-xl hover:bg-blue-700 transition-colors disabled:opacity-50"
+            className="bg-teal-600 text-white font-semibold px-6 py-2.5 rounded-xl hover:bg-teal-700 transition-colors disabled:opacity-50"
           >
             {loading === "pending_completion" ? t("completing", lang) : t("markCompleted", lang)}
           </button>

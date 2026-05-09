@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -37,7 +37,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-stone-50 flex items-center justify-center px-4">
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 w-full max-w-md">
         <h1 className="text-2xl font-bold mb-1">{t("welcomeBack2", lang)}</h1>
         <p className="text-gray-500 mb-6">{t("loginDesc", lang)}</p>
@@ -54,7 +54,7 @@ export default function LoginPage() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-teal-500"
               placeholder="you@example.com"
             />
           </div>
@@ -65,14 +65,14 @@ export default function LoginPage() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-teal-500"
               placeholder="••••••••"
             />
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white font-semibold py-3 rounded-xl hover:bg-blue-700 transition-colors disabled:opacity-50"
+            className="w-full bg-teal-600 text-white font-semibold py-3 rounded-xl hover:bg-teal-700 transition-colors disabled:opacity-50"
           >
             {loading ? t("signingIn", lang) : t("signIn", lang)}
           </button>
@@ -80,7 +80,7 @@ export default function LoginPage() {
 
         <p className="text-center text-gray-500 mt-6 text-sm">
           {t("noAccount", lang)}{" "}
-          <Link href="/register" className="text-blue-600 font-medium hover:underline">
+          <Link href="/register" className="text-teal-600 font-medium hover:underline">
             {t("register", lang)}
           </Link>
         </p>

@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+﻿import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { AlertCircle } from "lucide-react";
@@ -10,7 +10,7 @@ import { t, tService } from "@/lib/i18n";
 
 const STATUS_COLORS: Record<BookingStatus, string> = {
   pending: "bg-yellow-100 text-yellow-700",
-  confirmed: "bg-blue-100 text-blue-700",
+  confirmed: "bg-teal-100 text-teal-700",
   in_progress: "bg-purple-100 text-purple-700",
   completed: "bg-green-100 text-green-700",
   cancelled: "bg-gray-100 text-gray-500",
@@ -74,7 +74,7 @@ export default async function CleanerDashboardPage() {
                   : t("statusCancelled", lang)}
               </span>
             )}
-            <p className="font-semibold text-blue-600 text-sm">₪{b.price}</p>
+            <p className="font-semibold text-teal-600 text-sm">₪{b.price}</p>
             {showActions && (
               <div className="flex gap-1.5 flex-wrap justify-end">
                 {status === "pending" && (
@@ -106,7 +106,7 @@ export default async function CleanerDashboardPage() {
                 )}
               </div>
             )}
-            <Link href={`/bookings/${b.id}`} className="text-xs text-blue-500 hover:underline">
+            <Link href={`/bookings/${b.id}`} className="text-xs text-teal-500 hover:underline">
               {t("detailsActions", lang)}
             </Link>
           </div>
@@ -150,7 +150,7 @@ export default async function CleanerDashboardPage() {
           { label: t("totalEarnings", lang), value: `₪${totalEarnings.toFixed(0)}` },
         ].map(({ label, value }) => (
           <div key={label} className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 text-center">
-            <div className="text-2xl font-bold text-blue-600">{value}</div>
+            <div className="text-2xl font-bold text-teal-600">{value}</div>
             <div className="text-sm text-gray-500 mt-1">{label}</div>
           </div>
         ))}

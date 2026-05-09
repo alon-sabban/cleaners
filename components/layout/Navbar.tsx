@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { getLang } from "@/lib/language";
 import { t } from "@/lib/i18n";
@@ -23,7 +23,7 @@ export default async function Navbar() {
   return (
     <nav className="bg-white border-b border-gray-100 sticky top-0 z-50">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-        <Link href="/" className="text-xl font-bold text-blue-600">
+        <Link href="/" className="text-xl font-bold text-teal-600">
           CleanLy
         </Link>
 
@@ -54,7 +54,7 @@ export default async function Navbar() {
               </Link>
               <Link
                 href="/register"
-                className="bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                className="bg-teal-600 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-teal-700 transition-colors"
               >
                 {t("getStarted", lang)}
               </Link>

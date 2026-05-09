@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import Image from "next/image";
 import { Star, MapPin, CheckCircle } from "lucide-react";
 import { CleanerProfile } from "@/types";
@@ -26,7 +26,7 @@ export default function CleanerCard({ cleaner }: { cleaner: CleanerProfile & { p
           <div className="flex items-center gap-1.5">
             <span className="font-semibold truncate">{name}</span>
             {cleaner.is_verified && (
-              <CheckCircle size={15} className="text-blue-500 shrink-0" />
+              <CheckCircle size={15} className="text-teal-500 shrink-0" />
             )}
           </div>
           <div className="flex items-center gap-3 text-sm text-gray-500 mt-0.5">
@@ -42,7 +42,7 @@ export default function CleanerCard({ cleaner }: { cleaner: CleanerProfile & { p
           </div>
         </div>
         <div className="text-right rtl:text-left shrink-0">
-          <span className="text-lg font-bold text-blue-600">₪{cleaner.hourly_rate}</span>
+          <span className="text-lg font-bold text-teal-600">₪{cleaner.hourly_rate}</span>
           <span className="text-xs text-gray-400">/שעה</span>
         </div>
       </div>
@@ -52,7 +52,7 @@ export default function CleanerCard({ cleaner }: { cleaner: CleanerProfile & { p
           {(cleaner.services as string[]).slice(0, 3).map((s) => (
             <span
               key={s}
-              className="bg-blue-50 text-blue-600 text-xs font-medium px-2.5 py-1 rounded-full"
+              className="bg-teal-50 text-teal-600 text-xs font-medium px-2.5 py-1 rounded-full"
             >
               {s}
             </span>

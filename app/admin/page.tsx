@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+﻿import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 
 export default async function AdminPage() {
@@ -39,7 +39,7 @@ export default async function AdminPage() {
           { label: "בריאות הפלטפורמה", value: "99.9%" },
         ].map(({ label, value }) => (
           <div key={label} className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 text-center">
-            <div className="text-3xl font-bold text-blue-600">{value}</div>
+            <div className="text-3xl font-bold text-teal-600">{value}</div>
             <div className="text-sm text-gray-500 mt-1">{label}</div>
           </div>
         ))}

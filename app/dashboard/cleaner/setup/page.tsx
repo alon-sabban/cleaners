@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -132,7 +132,7 @@ export default function CleanerSetupPage() {
             value={form.location}
             onChange={(e) => setForm((f) => ({ ...f, location: e.target.value }))}
             placeholder={t("locationPlaceholder", lang)}
-            className="w-full border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-teal-500"
           />
         </div>
 
@@ -145,7 +145,7 @@ export default function CleanerSetupPage() {
             value={form.hourly_rate}
             onChange={(e) => setForm((f) => ({ ...f, hourly_rate: e.target.value }))}
             placeholder={t("hourlyRatePlaceholder", lang)}
-            className="w-full border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-teal-500"
           />
         </div>
 
@@ -159,8 +159,8 @@ export default function CleanerSetupPage() {
                 onClick={() => toggleService(hebrewName)}
                 className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors ${
                   form.services.includes(hebrewName)
-                    ? "bg-blue-600 text-white border-blue-600"
-                    : "bg-white text-gray-600 border-gray-200 hover:border-blue-300"
+                    ? "bg-teal-600 text-white border-teal-600"
+                    : "bg-white text-gray-600 border-gray-200 hover:border-teal-300"
                 }`}
               >
                 {serviceLabels[i]}
@@ -176,14 +176,14 @@ export default function CleanerSetupPage() {
             onChange={(e) => setForm((f) => ({ ...f, bio: e.target.value }))}
             rows={3}
             placeholder={t("bioPlaceholder", lang)}
-            className="w-full border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+            className="w-full border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-teal-500 resize-none"
           />
         </div>
 
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-600 text-white font-semibold py-3 rounded-xl hover:bg-blue-700 transition-colors disabled:opacity-50"
+          className="w-full bg-teal-600 text-white font-semibold py-3 rounded-xl hover:bg-teal-700 transition-colors disabled:opacity-50"
         >
           {loading ? t("saving", lang) : isEdit ? t("updateProfile", lang) : t("saveAndContinue", lang)}
         </button>

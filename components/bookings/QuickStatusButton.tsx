@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -8,7 +8,7 @@ type Variant = "green" | "red" | "blue" | "amber";
 const CLASSES: Record<Variant, string> = {
   green: "bg-green-600 text-white hover:bg-green-700",
   red: "bg-red-50 text-red-600 border border-red-200 hover:bg-red-100",
-  blue: "bg-blue-600 text-white hover:bg-blue-700",
+  blue: "bg-teal-600 text-white hover:bg-teal-700",
   amber: "bg-amber-500 text-white hover:bg-amber-600",
 };
 

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useRef } from "react";
 import { createClient } from "@/lib/supabase/client";
@@ -105,7 +105,7 @@ export default function ChatWindow({ bookingId, currentUserId, lang }: ChatWindo
                 <div
                   className={`max-w-xs px-4 py-2.5 rounded-2xl text-sm ${
                     isMe
-                      ? "bg-blue-600 text-white rounded-tl-sm"
+                      ? "bg-teal-600 text-white rounded-tl-sm"
                       : "bg-gray-100 text-gray-800 rounded-tr-sm"
                   }`}
                 >
@@ -128,12 +128,12 @@ export default function ChatWindow({ bookingId, currentUserId, lang }: ChatWindo
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder={t("writeMessage", lang)}
-          className="flex-1 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex-1 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
         />
         <button
           type="submit"
           disabled={sending || !input.trim()}
-          className="bg-blue-600 text-white px-4 py-2.5 rounded-xl hover:bg-blue-700 transition-colors disabled:opacity-50"
+          className="bg-teal-600 text-white px-4 py-2.5 rounded-xl hover:bg-teal-700 transition-colors disabled:opacity-50"
         >
           <Send size={16} />
         </button>

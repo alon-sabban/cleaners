@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, Suspense } from "react";
@@ -38,7 +38,7 @@ function FiltersInner() {
           <select
             value={service}
             onChange={(e) => setService(e.target.value)}
-            className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
           >
             <option value="">כל השירותים</option>
             {SERVICES.map((s) => (
@@ -53,7 +53,7 @@ function FiltersInner() {
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             placeholder="עיר או אזור..."
-            className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
           />
         </div>
         <div>
@@ -64,13 +64,13 @@ function FiltersInner() {
             onChange={(e) => setMaxRate(e.target.value)}
             placeholder="כל מחיר"
             min={0}
-            className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
           />
         </div>
       </div>
       <button
         type="submit"
-        className="mt-4 bg-blue-600 text-white font-semibold px-6 py-2.5 rounded-xl hover:bg-blue-700 transition-colors flex items-center gap-2 text-sm"
+        className="mt-4 bg-teal-600 text-white font-semibold px-6 py-2.5 rounded-xl hover:bg-teal-700 transition-colors flex items-center gap-2 text-sm"
       >
         <Search size={16} /> חפש
       </button>

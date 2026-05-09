@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -115,10 +115,10 @@ function RegisterForm() {
 
   if (awaitingEmail) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+      <div className="min-h-screen bg-stone-50 flex items-center justify-center px-4">
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-10 w-full max-w-md text-center">
-          <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-5">
-            <Mail className="text-blue-600" size={32} />
+          <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-5">
+            <Mail className="text-teal-600" size={32} />
           </div>
           <h1 className="text-2xl font-bold mb-2">{L.checkEmail}</h1>
           <p className="text-gray-500 mb-2">{L.sentLink}</p>
@@ -130,7 +130,7 @@ function RegisterForm() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-stone-50 flex items-center justify-center px-4">
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 w-full max-w-md">
         <h1 className="text-2xl font-bold mb-1">{L.title}</h1>
         <p className="text-gray-500 mb-6">{L.subtitle}</p>
@@ -147,7 +147,7 @@ function RegisterForm() {
               required
               value={form.full_name}
               onChange={handleChange}
-              className="w-full border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-teal-500"
               placeholder={L.fullNamePlaceholder}
             />
           </div>
@@ -159,7 +159,7 @@ function RegisterForm() {
               required
               value={form.email}
               onChange={handleChange}
-              className="w-full border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-teal-500"
               placeholder="you@example.com"
             />
           </div>
@@ -172,7 +172,7 @@ function RegisterForm() {
               minLength={6}
               value={form.password}
               onChange={handleChange}
-              className="w-full border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-teal-500"
               placeholder={L.passwordPlaceholder}
             />
           </div>
@@ -182,7 +182,7 @@ function RegisterForm() {
               name="role"
               value={form.role}
               onChange={handleChange}
-              className="w-full border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-teal-500"
             >
               <option value="client">{L.findCleaner}</option>
               <option value="cleaner">{L.offerCleaning}</option>
@@ -196,7 +196,7 @@ function RegisterForm() {
                 name="address"
                 value={form.address}
                 onChange={handleChange}
-                className="w-full border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-teal-500"
                 placeholder={L.addressPlaceholder}
               />
             </div>
@@ -205,7 +205,7 @@ function RegisterForm() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white font-semibold py-3 rounded-xl hover:bg-blue-700 transition-colors disabled:opacity-50"
+            className="w-full bg-teal-600 text-white font-semibold py-3 rounded-xl hover:bg-teal-700 transition-colors disabled:opacity-50"
           >
             {loading ? L.creating : L.createAccount}
           </button>
@@ -213,7 +213,7 @@ function RegisterForm() {
 
         <p className="text-center text-gray-500 mt-6 text-sm">
           {L.alreadyHave}{" "}
-          <Link href="/login" className="text-blue-600 font-medium hover:underline">
+          <Link href="/login" className="text-teal-600 font-medium hover:underline">
             {L.signIn}
           </Link>
         </p>

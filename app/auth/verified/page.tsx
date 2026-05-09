@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { CheckCircle, XCircle } from "lucide-react";
 
@@ -26,7 +26,7 @@ export default async function VerifiedPage({
 
   if (isError) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+      <div className="min-h-screen bg-stone-50 flex items-center justify-center px-4">
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-10 w-full max-w-md text-center">
           <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-5">
             <XCircle className="text-red-500" size={32} />
@@ -37,7 +37,7 @@ export default async function VerifiedPage({
           </p>
           <Link
             href="/register"
-            className="bg-blue-600 text-white font-semibold px-8 py-3 rounded-xl hover:bg-blue-700 transition-colors inline-block"
+            className="bg-teal-600 text-white font-semibold px-8 py-3 rounded-xl hover:bg-teal-700 transition-colors inline-block"
           >
             חזור להרשמה
           </Link>
@@ -47,7 +47,7 @@ export default async function VerifiedPage({
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-stone-50 flex items-center justify-center px-4">
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-10 w-full max-w-md text-center">
         <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-5">
           <CheckCircle className="text-green-500" size={32} />
@@ -61,14 +61,14 @@ export default async function VerifiedPage({
         {role === "cleaner" ? (
           <Link
             href="/dashboard/cleaner/setup"
-            className="bg-blue-600 text-white font-semibold px-8 py-3 rounded-xl hover:bg-blue-700 transition-colors inline-block"
+            className="bg-teal-600 text-white font-semibold px-8 py-3 rounded-xl hover:bg-teal-700 transition-colors inline-block"
           >
             השלם את הפרופיל שלך
           </Link>
         ) : (
           <Link
             href="/cleaners"
-            className="bg-blue-600 text-white font-semibold px-8 py-3 rounded-xl hover:bg-blue-700 transition-colors inline-block"
+            className="bg-teal-600 text-white font-semibold px-8 py-3 rounded-xl hover:bg-teal-700 transition-colors inline-block"
           >
             מצא מנקה
           </Link>
