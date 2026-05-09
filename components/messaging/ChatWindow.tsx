@@ -24,7 +24,7 @@ export default function ChatWindow({ bookingId, currentUserId, lang }: ChatWindo
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const supabase = createClient();
 
   useEffect(() => {
@@ -67,7 +67,8 @@ export default function ChatWindow({ bookingId, currentUserId, lang }: ChatWindo
   }, [bookingId]);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    const el = containerRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
   }, [messages]);
 
   async function sendMessage(e: React.FormEvent) {
@@ -86,7 +87,7 @@ export default function ChatWindow({ bookingId, currentUserId, lang }: ChatWindo
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="min-h-[200px] max-h-[400px] overflow-y-auto space-y-3 pb-2">
+      <div ref={containerRef} className="min-h-[200px] max-h-[400px] overflow-y-auto space-y-3 pb-2">
         {messages.length === 0 ? (
           <p className="text-gray-400 text-sm text-center py-8">{t("noMessages", lang)}</p>
         ) : (
@@ -120,7 +121,6 @@ export default function ChatWindow({ bookingId, currentUserId, lang }: ChatWindo
             );
           })
         )}
-        <div ref={bottomRef} />
       </div>
 
       <form onSubmit={sendMessage} className="flex gap-2 border-t border-gray-100 pt-3">
