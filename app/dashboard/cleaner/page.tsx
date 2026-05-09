@@ -46,7 +46,8 @@ export default async function CleanerDashboardPage() {
 
   const pending = bookings?.filter((b) => b.status === "pending") ?? [];
   const approved = bookings?.filter((b) => b.status === "confirmed" || b.status === "in_progress") ?? [];
-  const completedAll = bookings?.filter((b) => b.status === "completed" || b.status === "pending_completion" || b.status === "cancelled") ?? [];
+  const awaitingConfirmation = bookings?.filter((b) => b.status === "pending_completion") ?? [];
+  const completedAll = bookings?.filter((b) => b.status === "completed" || b.status === "cancelled") ?? [];
   const totalEarnings = bookings?.filter((b) => b.status === "completed").reduce((sum, b) => sum + Number(b.price), 0) ?? 0;
 
   function BookingCard({ b, showActions }: { b: NonNullable<typeof bookings>[number]; showActions: boolean }) {
@@ -64,19 +65,15 @@ export default async function CleanerDashboardPage() {
             <p className="text-xs text-gray-400">{b.address}</p>
           </div>
           <div className="flex flex-col items-end gap-2 shrink-0">
-            {status === "pending_completion" ? (
-              <span className="text-xs font-medium px-2 py-1 rounded-full bg-orange-100 text-orange-700">
-                {t("awaitingClientApproval", lang)}
+            {(status === "completed" || status === "cancelled" || status === "pending_completion") && (
+              <span className={`text-xs font-medium px-2 py-1 rounded-full ${STATUS_COLORS[status]}`}>
+                {status === "pending_completion"
+                  ? t("awaitingClientApproval", lang)
+                  : status === "completed"
+                  ? t("statusCompleted", lang)
+                  : t("statusCancelled", lang)}
               </span>
-            ) : status === "completed" ? (
-              <span className="text-xs font-medium px-2 py-1 rounded-full bg-green-100 text-green-700">
-                {t("statusCompleted", lang)}
-              </span>
-            ) : status === "cancelled" ? (
-              <span className="text-xs font-medium px-2 py-1 rounded-full bg-gray-100 text-gray-500">
-                {t("statusCancelled", lang)}
-              </span>
-            ) : null}
+            )}
             <p className="font-semibold text-blue-600 text-sm">₪{b.price}</p>
             {showActions && (
               <div className="flex gap-1.5 flex-wrap justify-end">
@@ -190,7 +187,26 @@ export default async function CleanerDashboardPage() {
         )}
       </section>
 
-      {/* Completed & Cancelled */}
+      {/* Awaiting buyer confirmation */}
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+          {t("awaitingConfirmation", lang)}
+          {awaitingConfirmation.length > 0 && (
+            <span className="bg-orange-100 text-orange-700 text-xs font-bold px-2 py-0.5 rounded-full">
+              {awaitingConfirmation.length}
+            </span>
+          )}
+        </h2>
+        {awaitingConfirmation.length > 0 ? (
+          <div className="space-y-3">
+            {awaitingConfirmation.map((b) => <BookingCard key={b.id} b={b} showActions={false} />)}
+          </div>
+        ) : (
+          <p className="text-gray-400 text-sm">—</p>
+        )}
+      </section>
+
+      {/* Completed */}
       <section>
         <h2 className="text-xl font-semibold mb-4">{t("completedJobs", lang)}</h2>
         {completedAll.length > 0 ? (

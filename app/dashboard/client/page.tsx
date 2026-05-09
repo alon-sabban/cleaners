@@ -44,11 +44,10 @@ export default async function ClientDashboardPage() {
     .eq("id", user.id)
     .single();
 
-  const pending  = bookings?.filter((b) => b.status === "pending") ?? [];
-  const approved = bookings?.filter((b) => b.status === "confirmed" || b.status === "in_progress") ?? [];
-  const completedAll = bookings?.filter((b) =>
-    b.status === "completed" || b.status === "pending_completion" || b.status === "cancelled"
-  ) ?? [];
+  const pending             = bookings?.filter((b) => b.status === "pending") ?? [];
+  const approved            = bookings?.filter((b) => b.status === "confirmed" || b.status === "in_progress") ?? [];
+  const awaitingConfirmation = bookings?.filter((b) => b.status === "pending_completion") ?? [];
+  const completedAll        = bookings?.filter((b) => b.status === "completed" || b.status === "cancelled") ?? [];
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
@@ -179,62 +178,84 @@ export default async function ClientDashboardPage() {
         )}
       </section>
 
-      {/* Completed */}
-      <section>
-        <h2 className="text-xl font-semibold mb-4">{t("completedJobs", lang)}</h2>
-        {completedAll.length > 0 ? (
+      {/* Confirm Completion */}
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+          {t("confirmCompletion", lang)}
+          {awaitingConfirmation.length > 0 && (
+            <span className="bg-orange-100 text-orange-700 text-xs font-bold px-2 py-0.5 rounded-full">
+              {awaitingConfirmation.length}
+            </span>
+          )}
+        </h2>
+        {awaitingConfirmation.length > 0 ? (
           <div className="space-y-3">
-            {completedAll.map((b) => {
+            {awaitingConfirmation.map((b) => {
               const cp = b.cleaner_profile as { full_name: string } | null;
-              const isPendingCompletion = b.status === "pending_completion";
               return (
-                <div
-                  key={b.id}
-                  className={`rounded-xl border shadow-sm p-4 ${
-                    isPendingCompletion
-                      ? "bg-orange-50 border-orange-200"
-                      : "bg-white border-gray-100 opacity-80"
-                  }`}
-                >
+                <div key={b.id} className="bg-orange-50 border border-orange-200 rounded-xl p-4">
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
                       <p className="font-medium truncate">{cp?.full_name ?? t("cleaner", lang)}</p>
-                      <p className="text-sm text-gray-500 mt-0.5">
-                        {tService(b.service_type, lang)} · {new Date(b.date).toLocaleDateString()}
+                      <p className="text-sm text-gray-600 mt-0.5">
+                        {tService(b.service_type, lang)} · {new Date(b.date).toLocaleDateString()} {t("at", lang)} {b.time}
                       </p>
-                      {isPendingCompletion && (
-                        <p className="text-sm text-orange-700 font-medium mt-1">
-                          {t("cleanerMarkedComplete", lang)}
-                        </p>
-                      )}
+                      <p className="text-sm text-orange-700 font-medium mt-1">
+                        {t("cleanerMarkedComplete", lang)}
+                      </p>
                     </div>
                     <div className="flex flex-col items-end gap-2 shrink-0">
-                      <span className={`text-xs font-medium px-2 py-1 rounded-full ${STATUS_COLORS[b.status as BookingStatus]}`}>
-                        {STATUS_LABELS[b.status as BookingStatus]}
-                      </span>
-                      <p className="font-semibold text-sm">₪{b.price}</p>
-                      {isPendingCompletion && (
-                        <div className="flex gap-1.5">
-                          <QuickStatusButton
-                            bookingId={b.id}
-                            newStatus="completed"
-                            label={t("approveCompletion", lang)}
-                            loadingLabel={t("approvingCompletion", lang)}
-                            variant="green"
-                          />
-                          <QuickStatusButton
-                            bookingId={b.id}
-                            newStatus="confirmed"
-                            label={t("markIncomplete", lang)}
-                            loadingLabel="..."
-                            variant="red"
-                          />
-                        </div>
-                      )}
+                      <p className="font-semibold text-blue-600 text-sm">₪{b.price}</p>
+                      <div className="flex gap-1.5">
+                        <QuickStatusButton
+                          bookingId={b.id}
+                          newStatus="completed"
+                          label={t("approveCompletion", lang)}
+                          loadingLabel={t("approvingCompletion", lang)}
+                          variant="green"
+                        />
+                        <QuickStatusButton
+                          bookingId={b.id}
+                          newStatus="confirmed"
+                          label={t("markIncomplete", lang)}
+                          loadingLabel="..."
+                          variant="red"
+                        />
+                      </div>
                       <Link href={`/bookings/${b.id}`} className="text-xs text-blue-500 hover:underline">
                         {t("detailsMessages", lang)}
                       </Link>
                     </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <p className="text-gray-400 text-sm">—</p>
+        )}
+      </section>
+
+      {/* Completed */}
+      <section>
+        <h2 className="text-xl font-semibold mb-4">{t("completedJobs", lang)}</h2>
+        {completedAll.length > 0 ? (
+          <div className="space-y-3 opacity-80">
+            {completedAll.map((b) => {
+              const cp = b.cleaner_profile as { full_name: string } | null;
+              return (
+                <div key={b.id} className="bg-white rounded-xl border border-gray-100 shadow-sm p-4 flex items-center justify-between">
+                  <div className="min-w-0">
+                    <p className="font-medium truncate">{cp?.full_name ?? t("cleaner", lang)}</p>
+                    <p className="text-sm text-gray-500">
+                      {tService(b.service_type, lang)} · {new Date(b.date).toLocaleDateString()}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-3 shrink-0">
+                    <span className={`text-xs font-medium px-2 py-1 rounded-full ${STATUS_COLORS[b.status as BookingStatus]}`}>
+                      {STATUS_LABELS[b.status as BookingStatus]}
+                    </span>
+                    <span className="font-semibold text-sm">₪{b.price}</span>
                   </div>
                 </div>
               );
