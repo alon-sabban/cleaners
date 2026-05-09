@@ -66,24 +66,33 @@ export default function BookingActions({ bookingId, status, isCleaner, lang }: B
           </>
         )}
 
-        {isCleaner && status === "confirmed" && (
+        {isCleaner && (status === "confirmed" || status === "in_progress") && (
           <button
-            onClick={() => updateStatus("in_progress")}
-            disabled={loading !== null}
-            className="bg-purple-600 text-white font-semibold px-6 py-2.5 rounded-xl hover:bg-purple-700 transition-colors disabled:opacity-50"
-          >
-            {loading === "in_progress" ? t("updating", lang) : t("markInProgress", lang)}
-          </button>
-        )}
-
-        {isCleaner && status === "in_progress" && (
-          <button
-            onClick={() => updateStatus("completed")}
+            onClick={() => updateStatus("pending_completion")}
             disabled={loading !== null}
             className="bg-blue-600 text-white font-semibold px-6 py-2.5 rounded-xl hover:bg-blue-700 transition-colors disabled:opacity-50"
           >
-            {loading === "completed" ? t("completing", lang) : t("markCompleted", lang)}
+            {loading === "pending_completion" ? t("completing", lang) : t("markCompleted", lang)}
           </button>
+        )}
+
+        {!isCleaner && status === "pending_completion" && (
+          <>
+            <button
+              onClick={() => updateStatus("completed")}
+              disabled={loading !== null}
+              className="bg-green-600 text-white font-semibold px-6 py-2.5 rounded-xl hover:bg-green-700 transition-colors disabled:opacity-50"
+            >
+              {loading === "completed" ? t("approvingCompletion", lang) : t("approveCompletion", lang)}
+            </button>
+            <button
+              onClick={() => updateStatus("confirmed")}
+              disabled={loading !== null}
+              className="bg-red-50 text-red-600 font-semibold px-6 py-2.5 rounded-xl hover:bg-red-100 transition-colors disabled:opacity-50"
+            >
+              {loading === "confirmed" ? "..." : t("markIncomplete", lang)}
+            </button>
+          </>
         )}
 
         {!isCleaner && (status === "pending" || status === "confirmed") && (

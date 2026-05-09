@@ -14,6 +14,7 @@ const STATUS_COLORS: Record<BookingStatus, string> = {
   in_progress: "bg-purple-100 text-purple-700",
   completed: "bg-green-100 text-green-700",
   cancelled: "bg-gray-100 text-gray-500",
+  pending_completion: "bg-orange-100 text-orange-700",
 };
 
 export default async function BookingDetailPage({
@@ -31,6 +32,7 @@ export default async function BookingDetailPage({
     in_progress: t("statusInProgress", lang),
     completed: t("statusCompleted", lang),
     cancelled: t("statusCancelled", lang),
+    pending_completion: t("statusPendingCompletion", lang),
   };
 
   const { data: { user } } = await supabase.auth.getUser();
@@ -136,14 +138,15 @@ export default async function BookingDetailPage({
       </div>
 
       {/* Actions */}
-      {booking.status !== "completed" && booking.status !== "cancelled" && (
+      {(booking.status !== "completed" && booking.status !== "cancelled" && booking.status !== "pending_completion") ||
+       (!isCleaner && booking.status === "pending_completion") ? (
         <BookingActions
           bookingId={id}
           status={booking.status as BookingStatus}
           isCleaner={isCleaner}
           lang={lang}
         />
-      )}
+      ) : null}
 
       {/* Chat */}
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">

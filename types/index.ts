@@ -5,7 +5,8 @@ export type BookingStatus =
   | "confirmed"
   | "in_progress"
   | "completed"
-  | "cancelled";
+  | "cancelled"
+  | "pending_completion";
 
 export interface Profile {
   id: string;

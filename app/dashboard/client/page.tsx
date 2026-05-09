@@ -3,8 +3,10 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { BookingStatus } from "@/types";
 import RefreshButton from "@/components/dashboard/RefreshButton";
+import QuickStatusButton from "@/components/bookings/QuickStatusButton";
 import { getLang } from "@/lib/language";
 import { t, tService } from "@/lib/i18n";
+import { CheckCircle } from "lucide-react";
 
 const STATUS_COLORS: Record<BookingStatus, string> = {
   pending: "bg-yellow-100 text-yellow-700",
@@ -12,6 +14,7 @@ const STATUS_COLORS: Record<BookingStatus, string> = {
   in_progress: "bg-purple-100 text-purple-700",
   completed: "bg-green-100 text-green-700",
   cancelled: "bg-gray-100 text-gray-500",
+  pending_completion: "bg-orange-100 text-orange-700",
 };
 
 export default async function ClientDashboardPage() {
@@ -27,6 +30,7 @@ export default async function ClientDashboardPage() {
     in_progress: t("statusInProgress", lang),
     completed: t("statusCompleted", lang),
     cancelled: t("statusCancelled", lang),
+    pending_completion: t("statusPendingCompletion", lang),
   };
 
   const { data: bookings } = await supabase
@@ -41,12 +45,9 @@ export default async function ClientDashboardPage() {
     .eq("id", user.id)
     .single();
 
-  const upcoming = bookings?.filter((b) =>
-    ["pending", "confirmed", "in_progress"].includes(b.status)
-  ) ?? [];
-  const past = bookings?.filter((b) =>
-    ["completed", "cancelled"].includes(b.status)
-  ) ?? [];
+  const needsApproval = bookings?.filter((b) => b.status === "pending_completion") ?? [];
+  const upcoming = bookings?.filter((b) => ["pending", "confirmed", "in_progress"].includes(b.status)) ?? [];
+  const past = bookings?.filter((b) => ["completed", "cancelled"].includes(b.status)) ?? [];
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
@@ -79,6 +80,58 @@ export default async function ClientDashboardPage() {
           </div>
         ))}
       </div>
+
+      {/* Needs Your Approval */}
+      {needsApproval.length > 0 && (
+        <section className="mb-8">
+          <h2 className="text-xl font-semibold mb-4 flex items-center gap-2 text-orange-700">
+            <CheckCircle size={20} />
+            {t("needsApproval", lang)}
+          </h2>
+          <div className="space-y-3">
+            {needsApproval.map((b) => {
+              const cp = b.cleaner_profile as { full_name: string } | null;
+              return (
+                <div key={b.id} className="bg-orange-50 border border-orange-200 rounded-xl p-5">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="font-medium">{cp?.full_name ?? t("cleaner", lang)}</p>
+                      <p className="text-sm text-gray-600 mt-0.5">
+                        {tService(b.service_type, lang)} · {new Date(b.date).toLocaleDateString()} {t("at", lang)} {b.time}
+                      </p>
+                      <p className="text-sm text-orange-700 mt-2 font-medium">
+                        {t("cleanerMarkedComplete", lang)}
+                      </p>
+                    </div>
+                    <div className="flex flex-col items-end gap-2 shrink-0">
+                      <p className="font-semibold text-blue-600">₪{b.price}</p>
+                      <div className="flex gap-2">
+                        <QuickStatusButton
+                          bookingId={b.id}
+                          newStatus="completed"
+                          label={t("approveCompletion", lang)}
+                          loadingLabel={t("approvingCompletion", lang)}
+                          variant="green"
+                        />
+                        <QuickStatusButton
+                          bookingId={b.id}
+                          newStatus="confirmed"
+                          label={t("markIncomplete", lang)}
+                          loadingLabel="..."
+                          variant="red"
+                        />
+                      </div>
+                      <Link href={`/bookings/${b.id}`} className="text-xs text-blue-500 hover:underline">
+                        {t("detailsMessages", lang)}
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
 
       {/* Upcoming */}
       <section className="mb-8">

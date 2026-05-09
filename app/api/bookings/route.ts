@@ -50,7 +50,7 @@ export async function PATCH(req: NextRequest) {
   const body = await req.json();
   const { id, status } = body;
 
-  const validStatuses = ["confirmed", "in_progress", "completed", "cancelled"];
+  const validStatuses = ["confirmed", "in_progress", "completed", "cancelled", "pending_completion"];
   if (!id || !validStatuses.includes(status)) {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
